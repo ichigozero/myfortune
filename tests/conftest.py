@@ -1,8 +1,10 @@
 import os
 
 import pytest
+from bs4 import BeautifulSoup
 
 from myfortune import Scraper
+from myfortune import TvAsahiScraper
 
 
 def test_file(filename):
@@ -22,3 +24,11 @@ def tv_asahi_data():
 @pytest.fixture
 def scraper():
     return Scraper()
+
+
+@pytest.fixture
+def tv_asahi_scraper(tv_asahi_data):
+    scraper = TvAsahiScraper()
+    scraper._soup = BeautifulSoup(tv_asahi_data, 'html.parser')
+
+    return scraper
