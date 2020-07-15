@@ -71,6 +71,62 @@ class FujiTvScraper(Scraper):
         return readings
 
 
+NIPPON_TV_URL = 'https://www.ntv.co.jp/sukkiri/sukkirisu/'
+
+
+class NipponTvScraper(Scraper):
+    def get_soup(self):
+        super().get_soup(NIPPON_TV_URL)
+
+    def extract_all_horoscope_readings(self):
+        readings = {}
+
+        try:
+            div_rows_1 = self._soup.find_all('div', class_='row1')
+            div_rows_2 = self._soup.find_all('div', class_='row2')
+
+            for index, div_row_1 in enumerate(div_rows_1):
+                div_rank = div_row_1.find('div', class_='rank')
+
+                if div_rank:
+                    rank = int(
+                        div_rank
+                        .get_text(strip=True)
+                        .replace('位', '')
+                    )
+                else:
+                    if index == 10:
+                        rank = 12
+                    else:
+                        rank = 1
+                month = int(
+                    div_row_1
+                    .find('p', class_='month')
+                    .find('span')
+                    .get_text(strip=True)
+                )
+                forecast = (
+                    div_rows_2[index]
+                    .find('p')
+                    .get_text(strip=True)
+                )
+                lucky_color = (
+                    div_rows_2[index]
+                    .find('div')
+                    .get_text(strip=True)
+                )
+
+                readings[month] = {
+                    'rank': rank,
+                    'forecast': forecast,
+                    'lucky_color': lucky_color
+                }
+        except (AttributeError, TypeError):
+            pass
+
+        return readings
+
+
 TV_ASAHI_URL = 'https://www.tv-asahi.co.jp/goodmorning/uranai/'
 
 
