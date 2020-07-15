@@ -1,0 +1,1248 @@
+<!DOCTYPE doctype html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <link href="https://fujitvforsugotoku.jp/1css/sugotoku/reset.css" rel="stylesheet" type="text/css"/>
+  <link href="https://fujitvforsugotoku.jp/1css/sugotoku/common.css" rel="stylesheet" type="text/css"/>
+  <link href="https://fujitvforsugotoku.jp/1css/sugotoku/base.css" rel="stylesheet" type="text/css"/>
+  <link href="https://fujitvforsugotoku.jp/1css/sugotoku/fortune2_2.css" rel="stylesheet" type="text/css"/>
+  <link href="https://fujitvforsugotoku.jp/1css/sugotoku/program6003.css" rel="stylesheet" type="text/css"/>
+  <link href="https://fujitvforsugotoku.jp/1css/add.css" rel="stylesheet" type="text/css">
+   <link href="https://fujitvforsugotoku.jp/1css/layout3.css" rel="stylesheet" type="text/css">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,shrink-to-fit=no" id="viewport" name="viewport"/>
+    <meta content="めざましテレビでおなじみの「めざまし占い」を毎日お届け！放送より詳しい情報を公開！めざまし占いを見逃したらココでチェック！" name="description"/>
+    <meta content="フジテレビ,スゴ得,めざまし占い,めざまし,めざましテレビ,めざましてれび" name="keywords"/>
+    <meta content="website" property="og:type">
+     <meta content="http://fcs2.sp2.fujitv.co.jp/fortune.php?slb=127" property="og:url">
+      <meta content="https://fujitvforsugotoku.jp/1images/text/thum_uranai_sns.jpg" property="og:image">
+       <meta content="めざましテレビでおなじみの「めざまし占い」を毎日お届け！放送より詳しい情報を公開！めざまし占いを見逃したらココでチェック！" property="og:title">
+        <meta content="フジテレビコンテンツストア" property="og:site_name"/>
+        <meta content="100003239903639" property="fb:admins"/>
+        <meta content="" property="og:description"/>
+        <meta content="summary_large_image" name="twitter:card"/>
+        <meta content="@FujiTV_contents" name="twitter:site"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js">
+        </script>
+        <script src="https://fujitvforsugotoku.jp/1js/sugotoku/g-navi.js" type="text/javascript">
+        </script>
+        <script src="https://fujitvforsugotoku.jp/1js/new_menu_common.js" type="text/javascript">
+        </script>
+        <title>
+         めざまし占い
+        </title>
+        <!-- 後で合体するスタイル -->
+        <style>
+         #rankList .cap {
+	font-size: 93%;
+	margin: 0 20px 8px 20px;
+	text-align: center;
+}
+#rankList .cap strong {
+	color: #f53f42;
+}
+
+.logincatch {
+	border: 1px solid #ff875c;
+	border-radius: 10px;
+	padding: 15px 15px 10px 15px;
+	margin: 0 15px;
+	background-color: #ffefe9;
+}
+.logincatch p {
+	font-size: 89%;
+	text-align: center;
+}
+.logincatch p .ttl {
+	display: block;
+	color: #ff5a1f;
+	font-size: 118%;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.logincatch p strong {
+	display: block;
+	margin-bottom: 10px;
+}
+
+/*#fortune #rankList > a .rankAstro::before {
+	content: "詳細";
+	position: absolute;
+	top: 88px;
+	right: -9px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	font-size: 60%;
+	line-height: 2;
+	width: auto;
+	height: auto;
+	padding: 0px 18px 0px 13px;
+	margin: 0;
+	background: #fff url(https://fujitvforsugotoku.jp/1images/sugotoku/fortune/arrow.png) no-repeat center right;
+	background-size: 12px 12px;
+	-moz-background-size: 12px 12px;
+	-webkit-background-size: 12px 12px;
+	box-shadow: 0 3px 0 rgba(0,0,0,0.4);
+	-moz-box-shadow: 0 3px 0 rgba(0,0,0,0.4);
+	-webkit-box-shadow: 0 3px 0 rgba(0,0,0,0.4);
+}*/
+
+.topbutton{
+	display: block;
+	width: 80%;  
+	font-size: 22px;
+	color: #050505;
+	margin: 0px auto;
+	padding: 10px 10px;
+	text-align: center;
+	background: -moz-linear-gradient(
+		top,
+		#f7ff00 0%,
+		#ffbf00);
+	background: -webkit-gradient(
+		linear, left top, left bottom,
+		from(#f7ff00),
+		to(#ffbf00));
+	-moz-border-radius: 30px;
+	-webkit-border-radius: 30px;
+	border-radius: 30px;
+	border: 0px solid #000000;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.4),
+		0px 1px 0px rgba(255,255,255,0.3);
+}
+        </style>
+        <!-- / 後で合体するスタイル -->
+        <script>
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29720311-2', 'fujitv.co.jp');
+  ga('send', 'pageview');
+        </script>
+        <!-- Google Tag Manager -->
+        <script>
+         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4MQTWZ');
+        </script>
+        <!-- End Google Tag Manager -->
+        <script>
+         window._izq = window._izq || []; window._izq.push(["init"]);
+        </script>
+        <script src="https://cdn.izooto.com/scripts/532446a903f70bf6a5bbc907876a392b2f07efd4.js">
+        </script>
+        <script type="text/javascript">
+         jQuery(function() {  
+    jQuery("a").click(function(e) {        
+        var ahref = jQuery(this).attr('href');
+        if (ahref.indexOf("fujitv.co.jp") != -1 || ahref.indexOf("http") == -1 ) {
+            ga('send', 'event', 'めざまし内部リンク', 'クリック', ahref);} 
+        else { 
+            ga('send', 'event', 'めざまし外部リンク', 'クリック', ahref);}
+        });
+    });
+        </script>
+        <script type="text/javascript">
+         <!--
+$(document).ready(function() {
+    $("a").each(function() { 
+        var obj = jQuery(this);
+        var link = obj.attr("href");
+        var now = (new Date).getTime();
+
+        if ( link.indexOf('?') != -1) {
+            obj.attr("href",link+'&randompara='+now)
+        } else {
+            obj.attr("href",link+'?randompara='+now)
+        }
+    });
+});
+
+//-->
+        </script>
+       </meta>
+      </meta>
+     </meta>
+    </meta>
+   </link>
+  </link>
+ </head>
+ <body>
+  <div class="side-menu">
+   <ul class="menu">
+    <li>
+     <!---- 
+<div id="scbox"><input type="text" placeholder="Search"></div>
+ ---->
+     <div id="sidenavi-box">
+      <img src="/1images/other/common/side/subtitle01.png" width="266"/>
+      <ul>
+       <li class="side-icons_01">
+        <a href="http://v.sp2.fujitv.co.jp/index.cgi">
+         トップページ
+        </a>
+       </li>
+       <li class="side-icons_02">
+        <a href="http://v.sp2.fujitv.co.jp/prgtop.cgi?bid=5000">
+         ドラマ
+        </a>
+       </li>
+       <li class="side-icons_03">
+        <a href="http://v.sp2.fujitv.co.jp/prgtop.cgi?bid=3000">
+         バラエティ
+        </a>
+       </li>
+       <li class="side-icons_04">
+        <a href="http://v.sp2.fujitv.co.jp/prgtop.cgi?bid=6000">
+         報道･情報
+        </a>
+       </li>
+       <!-- 
+<li class="side-icons_05"><a href="#">スポーツ</a></li>
+<li class="side-icons_06"><a href="#">アニメ</a></li>
+<li class="side-icons_07"><a href="#">映画</a></li>
+ -->
+       <li>
+        <img src="/1images/other/common/side/subtitle02.png" width="266"/>
+       </li>
+      </ul>
+      <div class="sidecate">
+       <a href="http://v.sp2.fujitv.co.jp/prgtop.cgi?bid=9999">
+        <img src="/1images/other/common/side/cate01.png" width="50"/>
+       </a>
+       <a href="http://v.sp2.fujitv.co.jp/prgtop.cgi?bid=9998">
+        <img src="/1images/other/common/side/cate02.png" width="50"/>
+       </a>
+       <a href="http://v.sp2.fujitv.co.jp/contents.cgi?bid=2187&amp;cntid=4">
+        <img src="/1images/other/common/side/cate03.png" width="50"/>
+       </a>
+       <a href="http://v.sp2.fujitv.co.jp/prgtop.cgi?bid=9997">
+        <img src="/1images/other/common/side/cate04.png" width="50"/>
+       </a>
+       <a href="http://v.sp2.fujitv.co.jp/prgtop.cgi?bid=0102">
+        <img src="/1images/other/common/side/cate05.png" width="50"/>
+       </a>
+       <a href="http://fcs2.sp2.fujitv.co.jp/esseRecipe.php">
+        <img src="/1images/other/common/side/cate06.png" width="50"/>
+       </a>
+       <a href="http://fcs2.sp2.fujitv.co.jp/columntop.php">
+        <img src="/1images/other/common/side/cate07.png" width="50"/>
+       </a>
+       <a href="http://fcs2.sp2.fujitv.co.jp/weather.php">
+        <img src="/1images/other/common/side/cate08.png" width="50"/>
+       </a>
+       <a href="http://v.sp2.fujitv.co.jp/prgtop.cgi?bid=1750">
+        <img src="/1images/other/common/side/cate09.png" width="50"/>
+       </a>
+      </div>
+      <div style="clear:both;">
+      </div>
+      <img src="/1images/other/common/side/subtitle03.png" width="266"/>
+      <ul class="side-info">
+       <li>
+        <a href="http://v.sp2.fujitv.co.jp/infocl.cgi?fn=hikitsugi">
+         docomoマイメニュー引継ぎのお客様へ
+        </a>
+       </li>
+       <li>
+        <a href="http://v.sp2.fujitv.co.jp/regist.cgi?md=1">
+         会員登録
+        </a>
+       </li>
+       <li>
+        <a href="http://v.sp2.fujitv.co.jp/regist.cgi?md=4">
+         ご利用規約
+        </a>
+       </li>
+       <li>
+        <a href="http://v.sp2.fujitv.co.jp/infocl.cgi?fn=pointservice">
+         ポイント制に関して
+        </a>
+       </li>
+       <li>
+        <a href="http://v.sp2.fujitv.co.jp/okterm.cgi">
+         対応端末一覧
+        </a>
+       </li>
+       <li>
+        <a href="http://v.sp2.fujitv.co.jp/infocl.cgi?fn=fcstoha">
+         フジテレビコンテンツストアとは?
+        </a>
+       </li>
+       <li>
+        <a href="http://v.sp2.fujitv.co.jp/member_point.cgi?md=1">
+         会員ポイント確認
+        </a>
+       </li>
+       <li>
+        <a href="http://v.sp2.fujitv.co.jp/regist.cgi?md=2">
+         会員解約
+        </a>
+       </li>
+       <li>
+        <a href="http://v.sp2.fujitv.co.jp/infocl.cgi?fn=qa">
+         FAQ(よくあるお問い合わせ)
+        </a>
+       </li>
+       <li>
+        <a href="http://v.sp2.fujitv.co.jp/otoi.cgi">
+         お問い合わせ
+        </a>
+       </li>
+       <li>
+        <a "="" href="http://v.sp2.fujitv.co.jp/infocl.cgi?fn=consumer">
+         特定商取引に基づく表示
+        </a>
+       </li>
+      </ul>
+     </div>
+    </li>
+   </ul>
+  </div>
+  <div id="container">
+   <header class="popup" id="g-head">
+    <div class="headleft menu-opend" id="btnMenuAction">
+    </div>
+    <div style="clear:both;">
+    </div>
+    <h1>
+     <a href="http://v.sp2.fujitv.co.jp/index.cgi">
+      フジテレビコンテンツストア
+     </a>
+    </h1>
+   </header>
+   <div id="fortune">
+    <div style="position:relative;">
+     <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/top_logo.png" width="100%"/>
+     <div style="position: absolute; top: 73%; left: 8%;">
+      <a href="http://v.sp2.fujitv.co.jp/regist.cgi?md=1?bid=6010&amp;slb=48">
+       <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/botan_touroku.png" width="90%"/>
+      </a>
+     </div>
+    </div>
+    <section id="rankList">
+     <div style="margin:0;background-color:#ff8c1b;padding:8px;">
+      <span style="font-weight:bold;color:#ffffff;font-size:90%;">
+       会員登録すると、TVよりくわしいアドバイスやラッキーナンバー、ラッキーカラー、ラッキーな星座が占えるよ★
+      </span>
+      <br/>
+      <a href="/fortuneselect.php?slb=49" style="display:block; text-align:center;">
+       <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/uranai_hyouji2.png" width="90%"/>
+      </a>
+      <br/>
+      <a href="https://coin.fujitv.co.jp/landing?q=23f085ff926f3099&amp;id=fcs-coupon" style="display:block; text-align:center;">
+       <img src="http://fujitvforsugotoku.jp/1images/mezamashi/fortunebanner/tamaru02_fcs.jpg" width="90%"/>
+      </a>
+     </div>
+    </section>
+    <h1 class="pageTitle">
+     6
+     <span>
+      月
+     </span>
+     9
+     <span>
+      日(火)
+     </span>
+     <span>
+      のランキング
+     </span>
+    </h1>
+    <!--<div align="center" style="text-align:center;">
+<a href="#sugotoku"><img src="https://fujitvforsugotoku.jp/1images/top/sugo_login_02_b.png" width="90%" /></a>
+</div>-->
+    <!-- ------------------▼マイページ登録ボタン▼------------------ -->
+    <!-- ------------------▼マイページ登録ボタン用▼------------------ -->
+    <!-- ------------------▲マイページ登録ボタン用▲------------------ -->
+    <!-- ------------------▼マイページ登録ボタン▼------------------ -->
+    <script>
+     $(function(){
+  $("#favButton").click(function () {
+    $("#favButton").css("display","none");
+    $('#mypagePop').css("display","none");
+  });
+});
+    </script>
+    <!-- ------------------▲マイページ登録ボタン▲------------------ -->
+    <!-- ------------------▲マイページ登録ボタン▲------------------ -->
+    <section id="rankList">
+     <!--<div id="mezaFix">めざましくん</div>-->
+     <!-------------- 1位　-------------->
+     <div class="rankArea">
+      <a href="/fortunedetails.php?ss=10&amp;e_code=fortunerank01&amp;slb=50&amp;">
+       <div class="rankAstro">
+        <span class="rank01">
+         1位
+        </span>
+        <span class="border">
+         <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/border0.png"/>
+        </span>
+        <span>
+         やぎ座
+        </span>
+       </div>
+      </a>
+      <section>
+       <div class="textAstro">
+        <p class="wordBgnng">
+         気合い充分で前進できるパワフル運勢！現状に
+        </p>
+        <table>
+         <tr>
+          <th id="starTitle">
+           ラッキーポイント
+          </th>
+         </tr>
+         <tr>
+          <td>
+           自分へのご褒美に買ったもの
+          </td>
+         </tr>
+        </table>
+       </div>
+       <a href="/fortunedetails.php?ss=10&amp;e_code=fortunerank01&amp;slb=50&amp;">
+        <div class="astro10ic">
+        </div>
+       </a>
+      </section>
+     </div>
+     <!-------------- 2位　-------------->
+     <div class="rankArea">
+      <a href="/fortunedetails.php?ss=6&amp;e_code=fortunerank02&amp;slb=50&amp;">
+       <div class="rankAstro">
+        <span class="rank02">
+         2位
+        </span>
+        <span class="border">
+         <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/border0.png"/>
+        </span>
+        <span>
+         おとめ座
+        </span>
+       </div>
+      </a>
+      <section>
+       <div class="textAstro">
+        <p class="wordBgnng">
+         自信に満ちた雰囲気が今日のあなたの強み
+        </p>
+        <table>
+         <tr>
+          <th id="starTitle">
+           ラッキーポイント
+          </th>
+         </tr>
+         <tr>
+          <td>
+           一輪挿し
+          </td>
+         </tr>
+        </table>
+       </div>
+       <a href="/fortunedetails.php?ss=6&amp;e_code=fortunerank02&amp;slb=50&amp;">
+        <div class="astro06ic">
+        </div>
+       </a>
+      </section>
+     </div>
+     <!-------------- 3位　-------------->
+     <div class="rankArea">
+      <a href="/fortunedetails.php?ss=12&amp;e_code=fortunerank03&amp;slb=50&amp;">
+       <div class="rankAstro">
+        <span class="rank03">
+         3位
+        </span>
+        <span class="border">
+         <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/border0.png"/>
+        </span>
+        <span>
+         うお座
+        </span>
+       </div>
+      </a>
+      <section>
+       <div class="textAstro">
+        <p class="wordBgnng">
+         観察力と推理力が冴える日！あなたの読みの
+        </p>
+        <table>
+         <tr>
+          <th id="starTitle">
+           ラッキーポイント
+          </th>
+         </tr>
+         <tr>
+          <td>
+           足裏のツボ押し
+          </td>
+         </tr>
+        </table>
+       </div>
+       <a href="/fortunedetails.php?ss=12&amp;e_code=fortunerank03&amp;slb=50&amp;">
+        <div class="astro12ic">
+        </div>
+       </a>
+      </section>
+     </div>
+     <!---- フジテレビからのおすすめ　---->
+     <section class="osusumeContents">
+     </section>
+     <!-------------- 4位　-------------->
+     <div class="rankArea">
+      <a href="/fortunedetails.php?ss=4&amp;e_code=fortunerank04&amp;slb=50&amp;">
+       <div class="rankAstro">
+        <span class="rank04">
+         4位
+        </span>
+        <span class="border">
+         <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/border0.png"/>
+        </span>
+        <span>
+         かに座
+        </span>
+       </div>
+      </a>
+      <section>
+       <div class="textAstro">
+        <p class="wordBgnng">
+         人間関係の修復日。こじれた話し合いも新たな
+        </p>
+        <table>
+         <tr>
+          <th id="starTitle">
+           ラッキーポイント
+          </th>
+         </tr>
+         <tr>
+          <td>
+           金縁のティーカップ
+          </td>
+         </tr>
+        </table>
+       </div>
+       <a href="/fortunedetails.php?ss=4&amp;e_code=fortunerank04&amp;slb=50&amp;">
+        <div class="astro04ic">
+        </div>
+       </a>
+      </section>
+     </div>
+     <!-------------- 5位　-------------->
+     <div class="rankArea">
+      <a href="/fortunedetails.php?ss=2&amp;e_code=fortunerank05&amp;slb=50&amp;">
+       <div class="rankAstro">
+        <span class="rank05">
+         5位
+        </span>
+        <span class="border">
+         <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/border0.png"/>
+        </span>
+        <span>
+         おうし座
+        </span>
+       </div>
+      </a>
+      <section>
+       <div class="textAstro">
+        <p class="wordBgnng">
+         違う世代の流行に注目して。例えば小さな子に
+        </p>
+        <table>
+         <tr>
+          <th id="starTitle">
+           ラッキーポイント
+          </th>
+         </tr>
+         <tr>
+          <td>
+           噴水
+          </td>
+         </tr>
+        </table>
+       </div>
+       <a href="/fortunedetails.php?ss=2&amp;e_code=fortunerank05&amp;slb=50&amp;">
+        <div class="astro02ic">
+        </div>
+       </a>
+      </section>
+     </div>
+     <!---- フジテレビからのおすすめ　---->
+     <section class="osusumeContents">
+      <p class="title">
+       ★フジテレビからのオススメ
+      </p>
+      <div class="contents">
+       <p class="image">
+        <img src="https://fujitvforsugotoku.jp/1images/hachimaga/202006/20200604_info_poster.jpg" width="100%"/>
+       </p>
+       <p class="text">
+        <strong>
+         ハチマガ「犯罪症候群 Season2」
+        </strong>
+        <br>
+         <br>
+          大人の土ドラ最新作！谷原章介さん主演「犯罪症候群 Season2」
+          <br/>
+         </br>
+        </br>
+       </p>
+      </div>
+      <p class="moreBtn">
+       <a href="http://fcs2.sp2.fujitv.co.jp/text.php?cKey=21&amp;tKey=5724&amp;slb=51">
+        <img alt="続きを見る" src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/mezamasi_fortune_osusume_btn.png" width="100%"/>
+       </a>
+      </p>
+     </section>
+     <!-------------- 6位　-------------->
+     <div class="rankArea">
+      <a href="/fortunedetails.php?ss=9&amp;e_code=fortunerank06&amp;slb=50&amp;">
+       <div class="rankAstro">
+        <span class="rank06">
+         6位
+        </span>
+        <span class="border">
+         <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/border0.png"/>
+        </span>
+        <span>
+         いて座
+        </span>
+       </div>
+      </a>
+      <section>
+       <div class="textAstro">
+        <p class="wordBgnng">
+         開運ポイントは外国語。外国のことわざや
+        </p>
+        <table>
+         <tr>
+          <th id="starTitle">
+           ラッキーポイント
+          </th>
+         </tr>
+         <tr>
+          <td>
+           1円玉
+          </td>
+         </tr>
+        </table>
+       </div>
+       <a href="/fortunedetails.php?ss=9&amp;e_code=fortunerank06&amp;slb=50&amp;">
+        <div class="astro09ic">
+        </div>
+       </a>
+      </section>
+     </div>
+     <!-------------- 7位　-------------->
+     <div class="rankArea">
+      <a href="/fortunedetails.php?ss=8&amp;e_code=fortunerank07&amp;slb=50&amp;">
+       <div class="rankAstro">
+        <span class="rank07">
+         7位
+        </span>
+        <span class="border">
+         <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/border0.png"/>
+        </span>
+        <span>
+         さそり座
+        </span>
+       </div>
+      </a>
+      <section>
+       <div class="textAstro">
+        <p class="wordBgnng">
+         ポジ思考が運を守るカギ。ネガな考えは振り払い
+        </p>
+        <table>
+         <tr>
+          <th id="starTitle">
+           ラッキーポイント
+          </th>
+         </tr>
+         <tr>
+          <td>
+           かわいい動物動画
+          </td>
+         </tr>
+        </table>
+       </div>
+       <a href="/fortunedetails.php?ss=8&amp;e_code=fortunerank07&amp;slb=50&amp;">
+        <div class="astro08ic">
+        </div>
+       </a>
+      </section>
+     </div>
+     <!---- フジテレビからのおすすめ　---->
+     <section class="osusumeContents">
+      <p class="title">
+       ★フジテレビからのオススメ
+      </p>
+      <div class="contents">
+       <p class="image">
+        <img src="https://fujitvforsugotoku.jp/1images/hachimaga/202005/20200528_001.jpg" width="100%"/>
+       </p>
+       <p class="text">
+        <strong>
+         ハチマガ「ね子とま太」
+        </strong>
+        <br/>
+        <br/>
+        たった40秒の中に凝縮された世界観で人気のクリエイター・尾中たけしさんのリモートインタビュー♪
+        <br/>
+       </p>
+      </div>
+      <p class="moreBtn">
+       <a href="http://fcs2.sp2.fujitv.co.jp/text.php?cKey=21&amp;tKey=5715&amp;slb=51">
+        <img alt="続きを見る" src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/mezamasi_fortune_osusume_btn.png" width="100%"/>
+       </a>
+      </p>
+     </section>
+     <!-------------- 8位　-------------->
+     <div class="rankArea">
+      <a href="/fortunedetails.php?ss=7&amp;e_code=fortunerank08&amp;slb=50&amp;">
+       <div class="rankAstro">
+        <span class="rank08">
+         8位
+        </span>
+        <span class="border">
+         <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/border0.png"/>
+        </span>
+        <span>
+         てんびん座
+        </span>
+       </div>
+      </a>
+      <section>
+       <div class="textAstro">
+        <p class="wordBgnng">
+         今日は食べ過ぎご用心！代謝低下の星回りなので
+        </p>
+        <table>
+         <tr>
+          <th id="starTitle">
+           ラッキーポイント
+          </th>
+         </tr>
+         <tr>
+          <td>
+           昨日と同じ靴
+          </td>
+         </tr>
+        </table>
+       </div>
+       <a href="/fortunedetails.php?ss=7&amp;e_code=fortunerank08&amp;slb=50&amp;">
+        <div class="astro07ic">
+        </div>
+       </a>
+      </section>
+     </div>
+     <!-------------- 9位　-------------->
+     <div class="rankArea">
+      <a href="/fortunedetails.php?ss=5&amp;e_code=fortunerank09&amp;slb=50&amp;">
+       <div class="rankAstro">
+        <span class="rank09">
+         9位
+        </span>
+        <span class="border">
+         <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/border0.png"/>
+        </span>
+        <span>
+         しし座
+        </span>
+       </div>
+      </a>
+      <section>
+       <div class="textAstro">
+        <p class="wordBgnng">
+         あなたの服装や持ち物などにあれこれチェックが
+        </p>
+        <table>
+         <tr>
+          <th id="starTitle">
+           ラッキーポイント
+          </th>
+         </tr>
+         <tr>
+          <td>
+           化粧品の広告
+          </td>
+         </tr>
+        </table>
+       </div>
+       <a href="/fortunedetails.php?ss=5&amp;e_code=fortunerank09&amp;slb=50&amp;">
+        <div class="astro05ic">
+        </div>
+       </a>
+      </section>
+     </div>
+     <!-------------- 10位　-------------->
+     <div class="rankArea">
+      <a href="/fortunedetails.php?ss=11&amp;e_code=fortunerank10&amp;slb=50&amp;">
+       <div class="rankAstro">
+        <span class="rank10">
+         10位
+        </span>
+        <span class="border">
+         <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/border0.png"/>
+        </span>
+        <span>
+         みずがめ座
+        </span>
+       </div>
+      </a>
+      <section>
+       <div class="textAstro">
+        <p class="wordBgnng">
+         競争力のない日。意見を戦わせたり、先を
+        </p>
+        <table>
+         <tr>
+          <th id="starTitle">
+           ラッキーポイント
+          </th>
+         </tr>
+         <tr>
+          <td>
+           レモンティ
+          </td>
+         </tr>
+        </table>
+       </div>
+       <a href="/fortunedetails.php?ss=11&amp;e_code=fortunerank10&amp;slb=50&amp;">
+        <div class="astro11ic">
+        </div>
+       </a>
+      </section>
+     </div>
+     <!-------------- 11位　-------------->
+     <div class="rankArea">
+      <a href="/fortunedetails.php?ss=1&amp;e_code=fortunerank11&amp;slb=50&amp;">
+       <div class="rankAstro">
+        <span class="rank11">
+         11位
+        </span>
+        <span class="border">
+         <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/border0.png"/>
+        </span>
+        <span>
+         おひつじ座
+        </span>
+       </div>
+      </a>
+      <section>
+       <div class="textAstro">
+        <p class="wordBgnng">
+         貸したお金の催促とか、義理のある人の頼みを
+        </p>
+        <table>
+         <tr>
+          <th id="starTitle">
+           ラッキーポイント
+          </th>
+         </tr>
+         <tr>
+          <td>
+           腹式呼吸
+          </td>
+         </tr>
+        </table>
+       </div>
+       <a href="/fortunedetails.php?ss=1&amp;e_code=fortunerank11&amp;slb=50&amp;">
+        <div class="astro01ic">
+        </div>
+       </a>
+      </section>
+     </div>
+     <!-------------- 12位　-------------->
+     <div class="rankArea">
+      <a href="/fortunedetails.php?ss=3&amp;e_code=fortunerank12&amp;slb=50&amp;">
+       <div class="rankAstro">
+        <span class="rank12">
+         12位
+        </span>
+        <span class="border">
+         <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/border0.png"/>
+        </span>
+        <span>
+         ふたご座
+        </span>
+       </div>
+      </a>
+      <section>
+       <div class="textAstro">
+        <p class="wordBgnng">
+         つい昔のことを引き合いに出したり、古い資料を
+        </p>
+        <table>
+         <tr>
+          <th id="starTitle">
+           おまじない
+          </th>
+         </tr>
+         <tr>
+          <td>
+           自分の名前を逆さ読みで3回唱える
+          </td>
+         </tr>
+        </table>
+       </div>
+       <a href="/fortunedetails.php?ss=3&amp;e_code=fortunerank12&amp;slb=50&amp;">
+        <div class="astro03ic">
+        </div>
+       </a>
+      </section>
+     </div>
+    </section>
+    <!-- ランキングここまで　-->
+    <div align="center" style="text-align:center;margin-top: 15px;">
+     <a href="http://click.dsiads.mopo.jp/?m=33049&amp;a=192012">
+      <img src="https://fujitvforsugotoku.jp/1images/top/sugo_login_02.png" width="90%"/>
+     </a>
+    </div>
+    <section class="updateTime">
+     <table>
+      <caption>
+       更新時間
+      </caption>
+      <tr>
+       <th>
+        月～金
+       </th>
+       <td>
+        午前8時更新
+       </td>
+      </tr>
+      <tr>
+       <th>
+        土
+       </th>
+       <td>
+        午前8時半更新
+       </td>
+      </tr>
+     </table>
+    </section>
+    <section class="pegaLink">
+     <ul>
+      <li class="setting">
+       <a href="/fortuneselect.php?slb=49&amp;">
+        <span style="color:#ffffff;">
+         星座登録・変更
+        </span>
+       </a>
+      </li>
+     </ul>
+    </section>
+    <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/setsumei.png" width="100%"/>
+    <!--<section class="logincatch">
+  	<p><span class="ttl">各星座の詳細ボタンを<br>タップすると…</span>
+<strong>占いの詳細や<br>
+ラッキーナンバー<br>
+ラッキーカラー<br>
+ラッキーな異性<br>
+ラッキーな同姓</strong>
+など放送よりも詳しい占いが見られるよ☆</p>
+	</section>-->
+   </div>
+   <!--------------------------------------------------------->
+   <!--フジメロ-->
+   <div style="padding-top:8px; text-align: center; background: #ececec;">
+    <a href="http://eshop.fujitv.co.jp/contents/B005001?waad=qoThtEYo">
+     <img src="https://fujitvforsugotoku.jp/1images/mezamashi/fortunebanner/eshop_mezamashi.png" width="90%"/>
+    </a>
+   </div>
+   <br/>
+   <!--------------------------------------------------------->
+   <table style="width:100%;">
+    <tbody>
+     <tr width="100%">
+      <td width="50%">
+       <a href="http://v.sp2.fujitv.co.jp/prgtop.cgi?bid=6002&amp;slb=53">
+        <div class="C4">
+         <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/end04.jpg" width="90%"/>
+        </div>
+       </a>
+      </td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+ </body>
+</html>
+<td>
+ <a href="http://www.fujitv.co.jp/meza/index.html">
+  <div class="C3">
+   <!--<input type="submit" value="めざましテレビ
+TOPへ">-->
+   <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/end03.jpg" width="90%"/>
+  </div>
+ </a>
+</td>
+<tr width="100%">
+ <td width="50%">
+  <a href="http://v.sp2.fujitv.co.jp/index.cgi?slb=52">
+   <div class="C2">
+    <!--<input type="submit" value="フジテレビコンテンツストア
+TOPへ">-->
+    <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/end02.jpg" width="90%"/>
+   </div>
+  </a>
+ </td>
+ <td>
+  <a href="http://www.fujitv.co.jp/index.html">
+   <div class="C1">
+    <!--<input type="submit" value="フジテレビ
+TOPへ">-->
+    <img src="https://fujitvforsugotoku.jp/1images/sugotoku/fortune/end01.jpg" width="90%"/>
+   </div>
+  </a>
+ </td>
+</tr>
+<!--
+<a href="http://www.fujitv.co.jp/meza/index.html"><div class="homeC"><input type="submit" value="めざましテレビ公式HPへ"></div></a>
+
+<a href="http://v.sp2.fujitv.co.jp/prgtop.cgi?bid=6002"><div class="homeC"><input type="submit" value="めざましテレビTOPへ"></div></a>
+
+  <div class="homeC">
+  <a href="http://v.sp2.fujitv.co.jp/index.cgi"><input type="submit" value="フジテレビコンテンツストアTOPへ"></a>
+  </div>
+  <div class="home">
+<a href="http://www.fujitv.co.jp/index.html">
+  <span><input type="submit" value="フジテレビTOPへ"></span>
+</a>
+  </div>
+-->
+<footer>
+ <p>
+  ©フジテレビジョン
+ </p>
+</footer>
+<!-- ------------------------バナーエリア-------------------------------------------------->
+<!-- ------------------------バナーエリア-------------------------------------------------->
+<script src="https://fujitvforsugotoku.jp/1js/sliderpop/readmore.js" type="text/javascript">
+</script>
+<script src="https://fujitvforsugotoku.jp/1js/sliderpop/slider.js" type="text/javascript">
+</script>
+<div id="bannerArea">
+ <div id="patternA" style="display:none;">
+  <div id="pickup">
+   <img src="https://fujitvforsugotoku.jp/1images/sugotoku/pickup.png"/>
+  </div>
+  <div id="bannerClose1">
+   Close×
+  </div>
+  <ul id="pattA">
+   <li>
+    <a class="recommend" href="/textCorner.php?cKey=1&amp;f_code=2">
+     <div class="listImg">
+      <img src="http://fujitvforsugotoku.jp/1images/sokokiku/p_nagashima2.jpg"/>
+     </div>
+     <div class="listText">
+      １．テキストテキストテキストテキストテキストテキストテキスト
+     </div>
+    </a>
+    <a class="recommend" href="/textCorner.php?cKey=2&amp;f_code=3">
+     <div class="listImg">
+      <img src="http://fujitvforsugotoku.jp/1images/sokokiku/p_nagano1.jpg"/>
+     </div>
+     <div class="listText">
+      ２．テキストテキストテキストテキスト
+     </div>
+    </a>
+    <a class="recommend" href="/textCorner.php?cKey=3&amp;f_code=4">
+     <div class="listImg">
+      <img src="http://fujitvforsugotoku.jp/1images/sokokiku/p_12_kikareru2.jpg"/>
+     </div>
+     <div class="listText">
+      ３．テキストテキストテキストテキストテキスト
+     </div>
+    </a>
+   </li>
+  </ul>
+ </div>
+ <div id="patternB" style="display:;">
+  <div id="pickup">
+   <img src="https://fujitvforsugotoku.jp/1images/sugotoku/pickup.png"/>
+  </div>
+  <div id="bannerClose2">
+   Close×
+  </div>
+  <ul id="pattB">
+   <li>
+    <a href="http://v.sp2.fujitv.co.jp/prgtop.cgi?bid=5145&amp;slb=17">
+     <img alt="SUITS2" src="https://fujitvforsugotoku.jp/1images/mezamashi/fortunebanner/suits2.jpg"/>
+    </a>
+    <a href="http://v.sp2.fujitv.co.jp/prgtop.cgi?bid=5164&amp;slb=17">
+     <img alt="アンサングシンデレラ" src="http://fujitvforsugotoku.jp/1images/mezamashi/fortunebanner/ansung.jpg"/>
+    </a>
+    <a href="http://v.sp2.fujitv.co.jp/prgtop.cgi?bid=8100&amp;slb=17">
+     <img alt="キャンペーン" src="http://fujitvforsugotoku.jp/1images/mezamashi/fortunebanner/campaign.jpg"/>
+    </a>
+   </li>
+  </ul>
+ </div>
+</div>
+<script src="http://fcs2.sp2.fujitv.co.jp/1js/jquery.cookie.js" type="text/javascript">
+</script>
+<script>
+ $(function(){
+  // 自動切り替えする要素の設定
+  //$('#pattA li').autoChange({effect : 'fade', type : 'repeat', timeout: 3000, speed : 1000}); //パターンA用
+  $('#pattB li').autoChange({effect : 'fade', type : 'repeat', timeout: 3000, speed : 1000}); //パターンB用
+
+if ($.cookie("bannerFlg") == "off") {
+    $("#bannerArea").css("display","none");
+    $("#bannerArea2").css("display","none");
+  } else {
+    $("#bannerArea").fadeIn();
+    $("#bannerArea2").fadeIn();
+  }
+});
+$("#bannerClose1").click(function () {
+    $.cookie("bannerFlg", "off", {expires: 1});
+    $("#bannerArea").fadeOut();
+});
+$("#bannerClose2").click(function () {
+    $.cookie("bannerFlg", "off", {expires: 1});
+    $("#bannerArea").fadeOut();
+});
+
+var ua = navigator.userAgent;  
+if( ua.indexOf("Android") > 0 ){
+	var androidversion = parseFloat(ua.slice(ua.indexOf("Android")+8));
+	console.log(androidversion);
+	if( androidversion < 4.0 ){
+		$("#patternA").css("display","none");
+		$("#patternB").css("display","none");
+	}else{
+	}
+}
+</script>
+<link href="https://fujitvforsugotoku.jp/1css/module.css" rel="stylesheet" type="text/css"/>
+<!-- ------------------------バナーエリア------------------------------------------------　-->
+<!-- ------------------------バナーエリア------------------------------------------------　-->
+<!--PARTS:sugotokuMypagePopup-->
+<!---　ポップアップ　--->
+<style charset="utf-8" type="text/css">
+ #mypageModal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 9999;
+padding: 60px 0;
+height: 100%;
+background: rgba(0,0,0,0.2);
+}
+#mypageModalInner {
+	margin: auto auto;
+	background: #fff;
+	box-shadow: 0 0 8px 0 rgba(0,0,0,0.5);
+	width: 280px;
+	height: 352px;
+border: 5px solid #fff;
+box-sizing: content-box;
+-webkit-box-sizing: content-box;
+	}
+#mypageModal .mainArea {
+	width: 280px;
+	height: 327px;
+position: relative;
+background: url(https://fujitvforsugotoku.jp/1images/sugotoku/fortune/bg_mezamashifortune_modal2.png) no-repeat left top;
+background-size: 100% auto;
+-webkit-background-size: 100% auto;
+}
+#favButtonModal {
+position: absolute;
+left: 0;
+right: 0;
+bottom: 10px;
+width: 90%;
+}
+.dcm_favorite_separateButton#favButtonModal a {
+font-sise: 18px !important;
+}
+.closeModalArea {
+	display: table;
+	width: 100%;
+	background: #777;
+	color: #fff;
+	font-size: 13px;
+height: 25px;
+line-height: 1.9;
+	}
+.checkboxModal {
+	border-right: 1px solid #fff;
+	text-align: center;
+	display: table-cell;
+	}
+.closeBtnModal {
+	border-left: 1px solid #fff;
+	text-align: center;
+	display: table-cell;
+	width: 50%;
+	}
+.disnon{
+	display:none;
+}
+</style>
+<script src="https://fujitvforsugotoku.jp/1js/new/jquery.cookie.js">
+</script>
+<script type="text/javascript">
+ $(function () {
+	$(".checkboxModal").click(function(){
+
+		chk_status = $("#mypageCheckModal").prop("checked");
+
+		$.removeCookie("mypageOn");
+		//取得したステータスが true なら false を、 false なら true をセットする
+		if(chk_status){
+		    $("#mypageCheckModal").prop("checked", false);
+			$.removeCookie("mypageOn");
+		}else{
+		    $("#mypageCheckModal").prop("checked", true);
+			$.cookie("mypageOn", "true", { expires: 999999 });
+		}
+	});
+
+	if($.cookie("mypageOn") != "true"){
+		$("#mypageModal").removeClass("disnon");
+	}
+
+
+	$(".closeBtnModal").click(function(){
+		$('#mypageModal').animate({opacity: '0'},{duration:300,easing:'swing',complete:
+			function(){
+				$('#mypageModal').css("display","none");
+			}
+		});
+	});
+	$("#favButton, #favButtonModal, #dcm_bookmarkArea_h").click(function(){
+    $("#favButton, #favButtonModal,  #dcm_bookmarkArea_h").css("display","none");
+		$('#mypageModal').css("display","none");
+	});
+});
+</script>
+<!--
+<script>
+$(function(){
+  $("#favButton").click(function () {
+    $("#favButton").css("display","none");
+    $('#mypageModal').css("display","none");
+  });
+});
+</script>
+-->
+<!---　ポップアップ　--->

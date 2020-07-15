@@ -16,6 +16,61 @@ class Scraper:
             pass
 
 
+FUJI_TV_URL = 'http://fcs2.sp2.fujitv.co.jp/fortune.php'
+
+
+class FujiTvScraper(Scraper):
+    def get_soup(self):
+        super().get_soup(FUJI_TV_URL)
+
+    def extract_all_horoscope_readings(self):
+        readings = {}
+
+        try:
+            rank_areas = self._soup.find_all('div', class_='rankArea')
+
+            for rank_area in rank_areas:
+                zodiac_sign = (
+                    rank_area
+                    .find('span', attrs={'class': None})
+                    .get_text(strip=True)
+                )
+                rank = int(
+                    rank_area
+                    .find('span', class_=re.compile('rank'))
+                    .get_text(strip=True)
+                    .replace('位', '')
+                )
+                forecast = rank_area.section.p.get_text(strip=True)
+                advice_section = rank_area.section.table.tr
+                advice_title = (
+                    advice_section
+                    .find('th', id='starTitle')
+                    .get_text(strip=True)
+                )
+                advice_description = (
+                    rank_area
+                    .section
+                    .table
+                    .td
+                    .contents[0]
+                    .strip()
+                )
+
+                readings[zodiac_sign] = {
+                    'rank': rank,
+                    'forecast': forecast,
+                    'advice': {
+                        'title': advice_title,
+                        'description': advice_description
+                    }
+                }
+        except (AttributeError, TypeError):
+            pass
+
+        return readings
+
+
 TV_ASAHI_URL = 'https://www.tv-asahi.co.jp/goodmorning/uranai/'
 
 
