@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 from myfortune import FujiTvScraper
 from myfortune import NipponTvScraper
 from myfortune import Scraper
+from myfortune import TbsScraper
 from myfortune import TvAsahiScraper
 
 
@@ -26,6 +27,11 @@ def fuji_tv_data():
 @pytest.fixture(scope='module')
 def nippon_tv_data():
     return test_file('nippon_tv.html').encode('utf-8')
+
+
+@pytest.fixture(scope='module')
+def tbs_data():
+    return test_file('tbs.html').encode('utf-8')
 
 
 @pytest.fixture(scope='module')
@@ -50,6 +56,14 @@ def fuji_tv_scraper(fuji_tv_data):
 def nippon_tv_scraper(nippon_tv_data):
     scraper = NipponTvScraper()
     scraper._soup = BeautifulSoup(nippon_tv_data, 'html.parser')
+
+    return scraper
+
+
+@pytest.fixture
+def tbs_scraper(tbs_data):
+    scraper = TbsScraper()
+    scraper._soup = BeautifulSoup(tbs_data, 'html.parser')
 
     return scraper
 

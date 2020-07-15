@@ -127,6 +127,84 @@ class NipponTvScraper(Scraper):
         return readings
 
 
+TBS_URL = 'https://www.tbs.co.jp/hayadoki/gudetama/'
+ZODIAC_SIGNS = {
+    'ohitsuji': 'おひつじ座',
+    'oushi': 'おうし座',
+    'futago': 'ふたご座',
+    'kani': 'かに座',
+    'shishi': 'しし座',
+    'otome': 'おとめ座',
+    'tenbin': 'てんびん座',
+    'sasori': 'さそり座',
+    'ite': 'いて座',
+    'yagi': 'やぎ座',
+    'mizugame': 'みずがめ座',
+    'uo': 'うお座'
+}
+
+
+class TbsScraper(Scraper):
+    def get_soup(self):
+        super().get_soup(TBS_URL)
+
+    def extract_all_horoscope_readings(self):
+        readings = {}
+
+        try:
+            uranai_boxes = self._soup.find_all(
+                'div',
+                id=re.compile('^uranai_box*')
+            )
+
+            for uranai_box in uranai_boxes:
+                zodiac_sign = ZODIAC_SIGNS.get(
+                    uranai_box.find_all('span')[1].get('id'))
+                rank = int(
+                    uranai_box
+                    .find('span', class_='alt')
+                    .get_text(strip=True)
+                    .replace('位', '')
+                )
+                forecast = (
+                    uranai_box
+                    .find('p', class_='uranai_text')
+                    .get_text(strip=True)
+                )
+                lucky_color = (
+                    uranai_box
+                    .find('span', class_='lucky_color')
+                    .get_text(strip=True)
+                    .replace(u'\xa0', u'')
+                    .replace('ラッキーカラー★', '')
+                )
+                lucky_item = (
+                    uranai_box
+                    .find('span', class_='lucky_item')
+                    .get_text(strip=True)
+                    .replace(u'\xa0', u'')
+                    .replace('ラッキーアイテム★', '')
+                )
+
+                p_tag = uranai_box.find('p', class_='advice_text')
+                if p_tag:
+                    advice = p_tag.get_text(strip=True)
+                else:
+                    advice = ''
+
+                readings[zodiac_sign] = {
+                    'rank': rank,
+                    'forecast': forecast,
+                    'lucky_color': lucky_color,
+                    'lucky_item': lucky_item,
+                    'advice': advice
+                }
+        except (AttributeError, TypeError):
+            pass
+
+        return readings
+
+
 TV_ASAHI_URL = 'https://www.tv-asahi.co.jp/goodmorning/uranai/'
 
 
