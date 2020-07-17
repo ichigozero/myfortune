@@ -79,4 +79,11 @@ def tv_asahi_scraper(tv_asahi_data):
 
 @pytest.fixture
 def mailer():
-    return Mailer()
+    smtp_config = {
+        'login': 'login',
+        'password': 'password',
+        'encryption': 'SSL',
+        'smtp': 'localhost',
+        'port': 1025
+    }
+    return Mailer(smtp_config)
