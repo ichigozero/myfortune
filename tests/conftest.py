@@ -4,6 +4,7 @@ import pytest
 from bs4 import BeautifulSoup
 
 from myfortune import FujiTvScraper
+from myfortune import Mailer
 from myfortune import NipponTvScraper
 from myfortune import Scraper
 from myfortune import TbsScraper
@@ -74,3 +75,15 @@ def tv_asahi_scraper(tv_asahi_data):
     scraper._soup = BeautifulSoup(tv_asahi_data, 'html.parser')
 
     return scraper
+
+
+@pytest.fixture
+def mailer():
+    smtp_config = {
+        'login': 'login',
+        'password': 'password',
+        'encryption': 'SSL',
+        'smtp': 'localhost',
+        'port': 1025
+    }
+    return Mailer(smtp_config)
