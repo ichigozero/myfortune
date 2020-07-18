@@ -58,7 +58,11 @@ class Mailer:
             pass
 
     def _compose_mail(self, sender_address, mail_subject, mail_body):
-        composed_mail = MIMEText(mail_body.encode('utf-8'), 'plain', 'utf-8')
+        composed_mail = MIMEText(
+            _text=mail_body.encode('utf-8'),
+            _subtype='plain',
+            _charset='utf-8'
+        )
 
         composed_mail['From'] = sender_address
         composed_mail['Subject'] = Header(
