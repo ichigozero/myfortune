@@ -1,3 +1,4 @@
+from .config import AppConfig
 from .mailer import Mailer
 from .scraper import FujiTvScraper
 from .scraper import NipponTvScraper

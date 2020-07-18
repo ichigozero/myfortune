@@ -4,6 +4,7 @@ import datetime
 import pytest
 from bs4 import BeautifulSoup
 
+from myfortune import AppConfig
 from myfortune import FujiTvScraper
 from myfortune import Mailer
 from myfortune import NipponTvScraper
@@ -46,6 +47,15 @@ def tv_asahi_data():
     return test_file('tv_asahi.html').encode('utf-8')
 
 
+@pytest.fixture(scope='module')
+def config_path():
+    return os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        'test_files',
+        'myfortune.json'
+    )
+
+
 @pytest.fixture
 def scraper():
     return Scraper()
@@ -81,6 +91,11 @@ def tv_asahi_scraper(tv_asahi_data):
     scraper._soup = BeautifulSoup(tv_asahi_data, 'html.parser')
 
     return scraper
+
+
+@pytest.fixture
+def app_config():
+    return AppConfig()
 
 
 @pytest.fixture
