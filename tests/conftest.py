@@ -1,4 +1,5 @@
 import os
+import datetime
 
 import pytest
 from bs4 import BeautifulSoup
@@ -18,6 +19,11 @@ def test_file(filename):
     )
     with open(os.path.join(path, filename), 'r') as f:
         return f.read()
+
+
+@pytest.fixture(scope='module')
+def fake_datetime():
+    return datetime.datetime(2020, 7, 17, 0, 0, 0)
 
 
 @pytest.fixture(scope='module')

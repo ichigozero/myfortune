@@ -26,6 +26,7 @@ def test_send_mail(monkeypatch, mocker, mailer):
 
     recipients = [{
         'email': 'foo@localhost',
+        'subject': '占い',
         'message': 'Hello World!'
     }]
     mailer.send_mail(recipients)
@@ -36,15 +37,25 @@ def test_send_mail(monkeypatch, mocker, mailer):
         to_addrs='foo@localhost',
         msg=mailer._compose_mail(
             sender_address=mailer._smtp_username,
+            mail_subject='占い',
             mail_body='Hello World!'
         )
     )
     spy_smtp_disconnect.assert_called_once()
 
 
-def test_compose_mail(mailer):
+def test_compose_mail(monkeypatch, fake_datetime, mailer):
+    class MockDatetime:
+        def today(*args, **kwargs):
+            return fake_datetime
+
+    import datetime
+
+    monkeypatch.setattr(datetime, 'datetime', MockDatetime)
+
     output = mailer._compose_mail(
         sender_address='john.doe@localhost',
+        mail_subject='占い',
         mail_body='Hello World!'
     )
     assert output == (
