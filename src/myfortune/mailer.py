@@ -1,6 +1,6 @@
 import smtplib
 import ssl
-from datetime import datetime
+import datetime
 from email.header import Header
 from email.mime.text import MIMEText
 
@@ -24,6 +24,7 @@ class Mailer:
                     to_addrs=recipient['email'],
                     msg=self._compose_mail(
                         sender_address=self._smtp_username,
+                        mail_subject=recipient['subject'],
                         mail_body=recipient['message']
                     )
                 )
@@ -56,14 +57,17 @@ class Mailer:
         except smtplib.SMTPException:
             pass
 
-    def _compose_mail(self, sender_address, mail_body):
-        def _generate_mail_subject():
-            return '占い・{}'.format(datetime.today().strftime("%Y/%m/%d"))
-
+    def _compose_mail(self, sender_address, mail_subject, mail_body):
         composed_mail = MIMEText(mail_body.encode('utf-8'), 'plain', 'utf-8')
 
         composed_mail['From'] = sender_address
-        composed_mail['Subject'] = Header(_generate_mail_subject(), 'utf-8')
+        composed_mail['Subject'] = Header(
+            s='{}・{}'.format(
+                mail_subject,
+                datetime.datetime.today().strftime('%Y/%m/%d')
+            ),
+            charset='utf-8'
+        )
         composed_mail['MIME-Version'] = '1.0'
         composed_mail['Content-type'] = 'text/plain; charset="utf-8"'
         composed_mail['Content-Transfer-Encoding'] = 'Base64'
