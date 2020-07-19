@@ -6,8 +6,8 @@ DEFAULT_CONFIG_PATH = os.path.join(str(Path.home()), 'myfortune.json')
 
 
 class AppConfig:
-    def __init__(self):
-        self._config_path = DEFAULT_CONFIG_PATH
+    def __init__(self, config_path=''):
+        self._config_path = config_path or DEFAULT_CONFIG_PATH
         self._config_values = None
 
     def export_config(self):
