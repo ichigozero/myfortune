@@ -2,7 +2,7 @@ import os
 import json
 from pathlib import Path
 
-DEFAULT_CONFIG_PATH = os.path.join(str(Path.home()), 'myfortune.json')
+DEFAULT_CONFIG_PATH = os.path.join(str(Path.home()), '.myfortune.json')
 
 
 class AppConfig:

@@ -1,4 +1,6 @@
+from .cli import init_config
 from .config import AppConfig
+from .config import DEFAULT_CONFIG_PATH
 from .mailer import Mailer
 from .scraper import FujiTvScraper
 from .scraper import NipponTvScraper
