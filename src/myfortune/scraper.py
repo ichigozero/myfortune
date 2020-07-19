@@ -1,12 +1,16 @@
 import re
 import requests
+from datetime import datetime
 
 from bs4 import BeautifulSoup
+
+from .zodiac import Zodiac
 
 
 class Scraper:
     def __init__(self):
         self._soup = None
+        self._horoscope_readings = {}
 
     def get_soup(self, url):
         try:
@@ -14,6 +18,9 @@ class Scraper:
             self._soup = BeautifulSoup(content, 'html.parser')
         except requests.exceptions.RequestException:
             pass
+
+    def filter_horoscope_readings(self, birthdate):
+        return self._horoscope_readings.get(Zodiac.get_zodiac_sign(birthdate))
 
 
 FUJI_TV_URL = 'http://fcs2.sp2.fujitv.co.jp/fortune.php'
@@ -24,9 +31,8 @@ class FujiTvScraper(Scraper):
         super().get_soup(FUJI_TV_URL)
 
     def extract_all_horoscope_readings(self):
-        readings = {}
-
         try:
+            readings = {}
             rank_areas = self._soup.find_all('div', class_='rankArea')
 
             for rank_area in rank_areas:
@@ -65,10 +71,10 @@ class FujiTvScraper(Scraper):
                         'description': advice_description
                     }
                 }
+
+            self._horoscope_readings.update(readings)
         except (AttributeError, TypeError):
             pass
-
-        return readings
 
 
 NIPPON_TV_URL = 'https://www.ntv.co.jp/sukkiri/sukkirisu/'
@@ -79,9 +85,8 @@ class NipponTvScraper(Scraper):
         super().get_soup(NIPPON_TV_URL)
 
     def extract_all_horoscope_readings(self):
-        readings = {}
-
         try:
+            readings = {}
             div_rows_1 = self._soup.find_all('div', class_='row1')
             div_rows_2 = self._soup.find_all('div', class_='row2')
 
@@ -121,10 +126,15 @@ class NipponTvScraper(Scraper):
                     'forecast': forecast,
                     'lucky_color': lucky_color
                 }
+
+            self._horoscope_readings.update(readings)
         except (AttributeError, TypeError):
             pass
 
-        return readings
+    def filter_horoscope_readings(self, birthdate):
+        parsed_birthdate = datetime.strptime(birthdate, '%m/%d')
+
+        return self._horoscope_readings.get(parsed_birthdate.month)
 
 
 TBS_URL = 'https://www.tbs.co.jp/hayadoki/gudetama/'
@@ -149,9 +159,8 @@ class TbsScraper(Scraper):
         super().get_soup(TBS_URL)
 
     def extract_all_horoscope_readings(self):
-        readings = {}
-
         try:
+            readings = {}
             uranai_boxes = self._soup.find_all(
                 'div',
                 id=re.compile('^uranai_box*')
@@ -199,10 +208,10 @@ class TbsScraper(Scraper):
                     'lucky_item': lucky_item,
                     'advice': advice
                 }
+
+            self._horoscope_readings = readings
         except (AttributeError, TypeError):
             pass
-
-        return readings
 
 
 TV_ASAHI_URL = 'https://www.tv-asahi.co.jp/goodmorning/uranai/'
@@ -213,9 +222,8 @@ class TvAsahiScraper(Scraper):
         super().get_soup(TV_ASAHI_URL)
 
     def extract_all_horoscope_readings(self):
-        readings = {}
-
         try:
+            readings = {}
             rank_box = self._soup.find('ul', class_='rank-box')
             li_tags = rank_box.find_all('li')
 
@@ -281,7 +289,7 @@ class TvAsahiScraper(Scraper):
                     'lucky_work': lucky_work,
                     'lucky_health': lucky_health
                 })
+
+            self._horoscope_readings = readings
         except (AttributeError, TypeError):
             pass
-
-        return readings

@@ -1,11 +1,10 @@
 from click.testing import CliRunner
 
-from myfortune import init_config
-
 
 def test_init_config(mocker):
     from myfortune import AppConfig
     from myfortune import DEFAULT_CONFIG_PATH
+    from myfortune import init_config
 
     export_config = mocker.patch.object(AppConfig, 'export_config')
 
