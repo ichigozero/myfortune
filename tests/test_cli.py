@@ -1,14 +1,13 @@
 from click.testing import CliRunner
 
+from myfortune import AppConfig
+from myfortune import DEFAULT_CONFIG_PATH
 from myfortune import FujiTvScraper
+from myfortune import init_config
 from myfortune import mezamashi
 
 
 def test_init_config(mocker):
-    from myfortune import AppConfig
-    from myfortune import DEFAULT_CONFIG_PATH
-    from myfortune import init_config
-
     export_config = mocker.patch.object(AppConfig, 'export_config')
 
     runner = CliRunner()

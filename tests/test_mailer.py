@@ -1,6 +1,8 @@
-def test_send_mail(monkeypatch, mocker, mailer):
-    import smtplib
+import datetime
+import smtplib
 
+
+def test_send_mail(monkeypatch, mocker, mailer):
     smtplib_mock = mocker.MagicMock()
     smtplib_mock.SMTP_SSL = mocker.Mock()
     mocker.patch.object(smtplib, 'SMTP_SSL', smtplib_mock)
@@ -37,8 +39,6 @@ def test_compose_mail(monkeypatch, fake_datetime, mailer):
     class MockDatetime:
         def today(*args, **kwargs):
             return fake_datetime
-
-    import datetime
 
     monkeypatch.setattr(datetime, 'datetime', MockDatetime)
 

@@ -2,6 +2,8 @@ import requests
 
 from bs4 import BeautifulSoup
 
+from myfortune import Zodiac
+
 DUMMY_URL = 'http://localhost'
 
 
@@ -18,8 +20,6 @@ def test_failed_to_get_soup(requests_mock, scraper):
 
 
 def test_filter_horoscope_readings(mocker, scraper):
-    from myfortune import Zodiac
-
     mocker.patch.object(Zodiac, 'get_zodiac_sign', return_value='おひつじ座')
     scraper._horoscope_readings = {'おひつじ座': 'foo'}
 
