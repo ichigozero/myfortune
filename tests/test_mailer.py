@@ -1,18 +1,4 @@
 def test_send_mail(monkeypatch, mocker, mailer):
-    def _mock_function(*args, **kwargs):
-        pass
-
-    monkeypatch.setattr(
-        mailer,
-        '_connect_to_smtp_server',
-        _mock_function
-    )
-    monkeypatch.setattr(
-        mailer,
-        '_disconnect_from_smtp_server',
-        _mock_function
-    )
-
     import smtplib
 
     smtplib_mock = mocker.MagicMock()
@@ -20,9 +6,12 @@ def test_send_mail(monkeypatch, mocker, mailer):
     mocker.patch.object(smtplib, 'SMTP_SSL', smtplib_mock)
     mailer._smtp_server = smtplib.SMTP_SSL()
 
-    spy_smtp_connect = mocker.spy(mailer, '_connect_to_smtp_server')
+    spy_smtp_connect = mocker.patch.object(mailer, '_connect_to_smtp_server')
     spy_smtp_send_mail = mocker.spy(mailer._smtp_server, 'sendmail')
-    spy_smtp_disconnect = mocker.spy(mailer, '_disconnect_from_smtp_server')
+    spy_smtp_disconnect = mocker.patch.object(
+        mailer,
+        '_disconnect_from_smtp_server'
+    )
 
     recipients = [{
         'email': 'foo@localhost',
