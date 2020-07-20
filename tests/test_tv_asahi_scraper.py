@@ -1,7 +1,7 @@
 def test_extract_all_horoscope_readings(tv_asahi_scraper):
-    readings = tv_asahi_scraper.extract_all_horoscope_readings()
+    tv_asahi_scraper.extract_all_horoscope_readings()
 
-    assert readings['みずがめ座'] == {
+    assert tv_asahi_scraper._horoscope_readings['みずがめ座'] == {
         'rank': 1,
         'forecast': (
             '年上の人や先輩との相性がバッチリ。'
@@ -16,7 +16,7 @@ def test_extract_all_horoscope_readings(tv_asahi_scraper):
         'lucky_health': 5
     }
 
-    assert readings['おひつじ座'] == {
+    assert tv_asahi_scraper._horoscope_readings['おひつじ座'] == {
         'rank': 12,
         'forecast': (
             '主張するタイミングを間違えそう。'

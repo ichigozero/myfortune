@@ -15,3 +15,12 @@ def test_failed_to_get_soup(requests_mock, scraper):
     requests_mock.get(DUMMY_URL, exc=requests.exceptions.HTTPError)
     scraper.get_soup(DUMMY_URL)
     assert scraper._soup is None
+
+
+def test_filter_horoscope_readings(mocker, scraper):
+    from myfortune import Zodiac
+
+    mocker.patch.object(Zodiac, 'get_zodiac_sign', return_value='おひつじ座')
+    scraper._horoscope_readings = {'おひつじ座': 'foo'}
+
+    assert scraper.filter_horoscope_readings('4/1') == 'foo'
