@@ -101,10 +101,10 @@ def app_config():
 @pytest.fixture
 def mailer():
     smtp_config = {
-        'login': 'login',
+        'username': 'bar@localhost',
         'password': 'password',
         'encryption': 'SSL',
-        'smtp': 'localhost',
+        'smtp_address': 'localhost',
         'port': 1025
     }
     return Mailer(smtp_config)
