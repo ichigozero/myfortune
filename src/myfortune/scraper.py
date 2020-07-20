@@ -27,6 +27,9 @@ FUJI_TV_URL = 'http://fcs2.sp2.fujitv.co.jp/fortune.php'
 
 
 class FujiTvScraper(Scraper):
+    def __str__(self):
+        return 'めざまし占い'
+
     def get_soup(self):
         super().get_soup(FUJI_TV_URL)
 
@@ -64,12 +67,10 @@ class FujiTvScraper(Scraper):
                 )
 
                 readings[zodiac_sign] = {
-                    'rank': rank,
+                    'rank': '{}位'.format(rank),
                     'forecast': forecast,
-                    'advice': {
-                        'title': advice_title,
-                        'description': advice_description
-                    }
+                    'advice_title': '★{}'.format(advice_title),
+                    'advice_description': advice_description
                 }
 
             self._horoscope_readings.update(readings)
@@ -81,6 +82,9 @@ NIPPON_TV_URL = 'https://www.ntv.co.jp/sukkiri/sukkirisu/'
 
 
 class NipponTvScraper(Scraper):
+    def __str__(self):
+        return '誕生月占い スッキリす！'
+
     def get_soup(self):
         super().get_soup(NIPPON_TV_URL)
 
@@ -155,6 +159,9 @@ ZODIAC_SIGNS = {
 
 
 class TbsScraper(Scraper):
+    def __str__(self):
+        return 'ぐでたま占い'
+
     def get_soup(self):
         super().get_soup(TBS_URL)
 
@@ -218,6 +225,9 @@ TV_ASAHI_URL = 'https://www.tv-asahi.co.jp/goodmorning/uranai/'
 
 
 class TvAsahiScraper(Scraper):
+    def __str__(self):
+        return 'ゴーゴー星占い'
+
     def get_soup(self):
         super().get_soup(TV_ASAHI_URL)
 

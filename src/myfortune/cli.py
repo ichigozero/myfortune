@@ -1,6 +1,7 @@
 import click
 
 from .config import AppConfig
+from .scraper import FujiTvScraper
 
 
 @click.group()
@@ -25,3 +26,29 @@ def init_config():
         'SMTP settings have been exported to '
         '{}'.format(app_config._config_path)
     )
+
+
+@cmd.group()
+def uranatte():
+    pass
+
+
+@uranatte.command()
+@click.argument('birthdate')
+def mezamashi(birthdate):
+    scraper = FujiTvScraper()
+    output_horoscope_readings(scraper, birthdate)
+
+
+def output_horoscope_readings(scraper, birthdate):
+    scraper.get_soup()
+    scraper.extract_all_horoscope_readings()
+
+    click.echo(scraper)
+    filtered_readings = (
+        scraper
+        .filter_horoscope_readings(birthdate)
+        .values()
+    )
+    for filtered_reading in filtered_readings:
+        click.echo(filtered_reading)

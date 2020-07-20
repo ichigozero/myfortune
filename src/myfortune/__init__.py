@@ -1,4 +1,5 @@
 from .cli import init_config
+from .cli import mezamashi
 from .config import AppConfig
 from .config import DEFAULT_CONFIG_PATH
 from .mailer import Mailer
