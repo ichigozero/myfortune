@@ -3,6 +3,9 @@ import click
 from .config import AppConfig
 from .mailer import Mailer
 from .scraper import FujiTvScraper
+from .scraper import NipponTvScraper
+from .scraper import TbsScraper
+from .scraper import TvAsahiScraper
 
 
 @click.group()
@@ -40,6 +43,34 @@ def uranatte():
 @click.argument('birthdate')
 def mezamashi(email, birthdate):
     scraper = FujiTvScraper()
+    output_horoscope_readings(scraper, birthdate, email)
+
+
+@uranatte.command()
+@click.option('-e', '--email')
+@click.argument('birthdate')
+def sukkirisu(email, birthdate):
+    scraper = NipponTvScraper()
+    output_horoscope_readings(scraper, birthdate, email)
+
+
+@uranatte.command()
+@click.option('-e', '--email')
+@click.argument('birthdate')
+def gudetama(email, birthdate):
+    scraper = TbsScraper()
+    output_horoscope_readings(scraper, birthdate, email)
+
+
+@uranatte.command()
+@click.option('-e', '--email')
+@click.argument('birthdate')
+def go_go_hoshi(email, birthdate):
+    scraper = TvAsahiScraper()
+    output_horoscope_readings(scraper, birthdate, email)
+
+
+def output_horoscope_readings(scraper, birthdate, email):
     if email:
         send_horoscope_readings(scraper, birthdate, email)
     else:
@@ -57,7 +88,8 @@ def print_horoscope_readings(scraper, birthdate):
         .values()
     )
     for reading in filtered_readings:
-        click.echo(reading)
+        if reading:
+            click.echo(reading)
 
 
 def send_horoscope_readings(scraper, birthdate, email):
@@ -75,7 +107,11 @@ def send_horoscope_readings(scraper, birthdate, email):
     recipients = [{
         'email': email,
         'subject': str(scraper),
-        'message': '\n'.join([reading for reading in filtered_readings])
+        'message': '\n'.join([
+            reading
+            for reading in filtered_readings
+            if reading
+        ])
     }]
 
     mailer = Mailer(smtp_config=app_config.config_values['smtp'])

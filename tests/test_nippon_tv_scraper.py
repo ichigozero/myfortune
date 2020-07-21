@@ -2,7 +2,7 @@ def test_extract_all_horoscope_readings(nippon_tv_scraper):
     nippon_tv_scraper.extract_all_horoscope_readings()
 
     assert nippon_tv_scraper._horoscope_readings[5] == {
-        'rank': 1,
+        'rank': '1位',
         'forecast': (
             '対人運に恵まれる１日。'
             'あなたの味方が現れるのでたまには甘えてみよう'
@@ -11,7 +11,7 @@ def test_extract_all_horoscope_readings(nippon_tv_scraper):
     }
 
     assert nippon_tv_scraper._horoscope_readings[3] == {
-        'rank': 12,
+        'rank': '12位',
         'forecast': (
             'プレッシャーに押しつぶされそう。'
             '気を使いすぎて空回りしないでね'
