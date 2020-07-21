@@ -97,15 +97,42 @@ class NipponTvScraper(Scraper):
                 div_rank = div_row_1.find('div', class_='rank')
 
                 if div_rank:
-                    rank = (
+                    rank = int(
                         div_rank
                         .get_text(strip=True)
+                        .replace('位', '')
                     )
                 else:
                     if index == 10:
-                        rank = '12位'
+                        rank = 12
                     else:
-                        rank = '1位'
+                        rank = 1
+
+                if rank == 1:
+                    rank_group = (
+                        self._soup
+                        .find('h3', class_='rankGroup-1')
+                        .get_text(strip=True)
+                    )
+                elif rank < 7:
+                    rank_group = (
+                        self._soup
+                        .find('h3', class_='rankGroup-2')
+                        .get_text(strip=True)
+                    )
+                elif rank < 11:
+                    rank_group = (
+                        self._soup
+                        .find('h3', class_='rankGroup-7')
+                        .get_text(strip=True)
+                    )
+                else:
+                    rank_group = (
+                        self._soup
+                        .find('h3', class_='rankGroup-12')
+                        .get_text(strip=True)
+                    )
+
                 month = int(
                     div_row_1
                     .find('p', class_='month')
@@ -124,9 +151,13 @@ class NipponTvScraper(Scraper):
                 )
 
                 readings[month] = {
-                    'rank': rank,
+                    'rank': '{}位'.format(rank),
+                    'rank_group': rank_group,
                     'forecast': forecast,
-                    'lucky_color': lucky_color
+                    'lucky_color': ''.join([
+                        'ラッキーカラー：',
+                        lucky_color
+                    ])
                 }
 
             self._horoscope_readings.update(readings)
