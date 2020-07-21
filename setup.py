@@ -10,4 +10,13 @@ setup(
     author_email='gary.sentosa@gmail.com',
     packages=find_packages(where='src'),
     package_dir={'': 'src'},
+    install_requires=[
+        'beautifulsoup4',
+        'click',
+        'requests',
+    ],
+    entry_points='''
+        [console_scripts]
+        myfortune=myfortune.__main__:main
+    ''',
 )
