@@ -252,36 +252,41 @@ class TvAsahiScraper(Scraper):
                     .find('p', class_='read')
                     .get_text(strip=True)
                 )
-                key_of_fortune = (
+
+                lucky_color_text = (
                     seiza_box
-                    .find('div', class_='read-area')
-                    .contents[8]
-                    .replace('：', '')
-                    .strip()
+                    .find('span', class_='lucky-color-txt')
                 )
-                lucky_color = (
+                lucky_color = ''.join([
+                    lucky_color_text.get_text(strip=True),
+                    lucky_color_text.next_sibling.strip()
+                ])
+
+                key_of_fortune_text = (
                     seiza_box
-                    .find('div', class_='read-area')
-                    .contents[4]
-                    .replace('：', '')
-                    .strip()
+                    .find('span', class_='key-txt')
                 )
-                lucky_money = len(
+                key_of_fortune = ''.join([
+                    key_of_fortune_text.get_text(strip=True),
+                    key_of_fortune_text.next_sibling.strip()
+                ])
+
+                lucky_money_count = len(
                     seiza_box
                     .find('li', class_='lucky-money')
                     .find_all('img', class_='icon-money')
                 )
-                lucky_love = len(
+                lucky_love_count = len(
                     seiza_box
                     .find('li', class_='lucky-love')
                     .find_all('img', class_='icon-love')
                 )
-                lucky_work = len(
+                lucky_work_count = len(
                     seiza_box
                     .find('li', class_='lucky-work')
                     .find_all('img', class_='icon-work')
                 )
-                lucky_health = len(
+                lucky_health_count = len(
                     seiza_box
                     .find('li', class_='lucky-health')
                     .find_all('img', class_='icon-health')
@@ -289,12 +294,24 @@ class TvAsahiScraper(Scraper):
 
                 readings[zodiac_sign].update({
                     'forecast': forecast,
-                    'key_of_fortune': key_of_fortune,
                     'lucky_color': lucky_color,
-                    'lucky_money': str(lucky_money),
-                    'lucky_love': str(lucky_love),
-                    'lucky_work': str(lucky_work),
-                    'lucky_health': str(lucky_health)
+                    'key_of_fortune': key_of_fortune,
+                    'lucky_money': ''.join([
+                        '金運：',
+                        '★' * lucky_money_count
+                    ]),
+                    'lucky_love': ''.join([
+                        '恋愛運：',
+                        '★' * lucky_love_count
+                    ]),
+                    'lucky_work': ''.join([
+                        '仕事運：',
+                        '★' * lucky_work_count
+                    ]),
+                    'lucky_health': ''.join([
+                        '健康運：',
+                        '★' * lucky_health_count
+                    ])
                 })
 
             self._horoscope_readings = readings
