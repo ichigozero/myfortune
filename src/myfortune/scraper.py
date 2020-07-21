@@ -195,6 +195,14 @@ class TbsScraper(Scraper):
         super().get_soup(TBS_URL)
 
     def extract_all_horoscope_readings(self):
+        def _extract_rank_title(div_class_name):
+            return (
+                self._soup
+                .find('div', class_=div_class_name)
+                .find('span')
+                .get_text(strip=True)
+            )
+
         try:
             readings = {}
             uranai_boxes = self._soup.find_all(
@@ -205,11 +213,24 @@ class TbsScraper(Scraper):
             for uranai_box in uranai_boxes:
                 zodiac_sign = ZODIAC_SIGNS.get(
                     uranai_box.find_all('span')[1].get('id'))
-                rank = (
+                rank = int(
                     uranai_box
                     .find('span', class_='alt')
                     .get_text(strip=True)
+                    .replace('位', '')
                 )
+
+                if rank == 1:
+                    rank_title = ''
+                elif rank < 6:
+                    rank_title = _extract_rank_title('mini_tit1')
+                elif rank < 9:
+                    rank_title = _extract_rank_title('mini_tit2')
+                elif rank < 12:
+                    rank_title = _extract_rank_title('mini_tit3')
+                else:
+                    rank_title = _extract_rank_title('mini_tit4')
+
                 forecast = (
                     uranai_box
                     .find('p', class_='uranai_text')
@@ -220,14 +241,12 @@ class TbsScraper(Scraper):
                     .find('span', class_='lucky_color')
                     .get_text(strip=True)
                     .replace(u'\xa0', u'')
-                    .replace('ラッキーカラー★', '')
                 )
                 lucky_item = (
                     uranai_box
                     .find('span', class_='lucky_item')
                     .get_text(strip=True)
                     .replace(u'\xa0', u'')
-                    .replace('ラッキーアイテム★', '')
                 )
 
                 p_tag = uranai_box.find('p', class_='advice_text')
@@ -237,7 +256,8 @@ class TbsScraper(Scraper):
                     advice = ''
 
                 readings[zodiac_sign] = {
-                    'rank': rank,
+                    'rank': '{}位'.format(rank),
+                    'rank_title': rank_title,
                     'forecast': forecast,
                     'lucky_color': lucky_color,
                     'lucky_item': lucky_item,
