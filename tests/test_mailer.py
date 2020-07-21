@@ -28,6 +28,7 @@ def test_send_mail(monkeypatch, mocker, mailer):
         to_addrs='foo@localhost',
         msg=mailer._compose_mail(
             sender_address=mailer._smtp_username,
+            recipient_address='foo@localhost',
             mail_subject='占い',
             mail_body='Hello World!'
         )
@@ -44,6 +45,7 @@ def test_compose_mail(monkeypatch, fake_datetime, mailer):
 
     output = mailer._compose_mail(
         sender_address='john.doe@localhost',
+        recipient_address='foo@localhost',
         mail_subject='占い',
         mail_body='Hello World!'
     )
@@ -52,6 +54,7 @@ def test_compose_mail(monkeypatch, fake_datetime, mailer):
         'MIME-Version: 1.0\n'
         'Content-Transfer-Encoding: base64\n'
         'From: john.doe@localhost\n'
+        'To: foo@localhost\n'
         'Subject: =?utf-8?b?5Y2g44GE44O7MjAyMC8wNy8xNw==?=\n'
         'MIME-Version: 1.0\n'
         'Content-type: text/plain; charset="utf-8"\n'

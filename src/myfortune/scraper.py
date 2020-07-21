@@ -44,11 +44,10 @@ class FujiTvScraper(Scraper):
                     .find('span', attrs={'class': None})
                     .get_text(strip=True)
                 )
-                rank = int(
+                rank = (
                     rank_area
                     .find('span', class_=re.compile('rank'))
                     .get_text(strip=True)
-                    .replace('位', '')
                 )
                 forecast = rank_area.section.p.get_text(strip=True)
                 advice_section = rank_area.section.table.tr
@@ -67,7 +66,7 @@ class FujiTvScraper(Scraper):
                 )
 
                 readings[zodiac_sign] = {
-                    'rank': '{}位'.format(rank),
+                    'rank': rank,
                     'forecast': forecast,
                     'advice_title': '★{}'.format(advice_title),
                     'advice_description': advice_description
@@ -98,16 +97,15 @@ class NipponTvScraper(Scraper):
                 div_rank = div_row_1.find('div', class_='rank')
 
                 if div_rank:
-                    rank = int(
+                    rank = (
                         div_rank
                         .get_text(strip=True)
-                        .replace('位', '')
                     )
                 else:
                     if index == 10:
-                        rank = 12
+                        rank = '12位'
                     else:
-                        rank = 1
+                        rank = '1位'
                 month = int(
                     div_row_1
                     .find('p', class_='month')
@@ -176,11 +174,10 @@ class TbsScraper(Scraper):
             for uranai_box in uranai_boxes:
                 zodiac_sign = ZODIAC_SIGNS.get(
                     uranai_box.find_all('span')[1].get('id'))
-                rank = int(
+                rank = (
                     uranai_box
                     .find('span', class_='alt')
                     .get_text(strip=True)
-                    .replace('位', '')
                 )
                 forecast = (
                     uranai_box
@@ -239,7 +236,7 @@ class TvAsahiScraper(Scraper):
 
             for rank_index, li_tag in enumerate(li_tags, start=1):
                 zodiac_sign = li_tag.find('span').get_text(strip=True)
-                readings[zodiac_sign] = {'rank': rank_index}
+                readings[zodiac_sign] = {'rank': '{}位'.format(rank_index)}
 
             seiza_boxes = self._soup.find_all('div', class_='seiza-box')
 
@@ -294,10 +291,10 @@ class TvAsahiScraper(Scraper):
                     'forecast': forecast,
                     'key_of_fortune': key_of_fortune,
                     'lucky_color': lucky_color,
-                    'lucky_money': lucky_money,
-                    'lucky_love': lucky_love,
-                    'lucky_work': lucky_work,
-                    'lucky_health': lucky_health
+                    'lucky_money': str(lucky_money),
+                    'lucky_love': str(lucky_love),
+                    'lucky_work': str(lucky_work),
+                    'lucky_health': str(lucky_health)
                 })
 
             self._horoscope_readings = readings

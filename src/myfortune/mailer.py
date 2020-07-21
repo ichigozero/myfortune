@@ -7,11 +7,11 @@ from email.mime.text import MIMEText
 
 class Mailer:
     def __init__(self, smtp_config):
-        self._smtp_username = smtp_config.get('login')
-        self._stmp_password = smtp_config.get('password')
-        self._encryption = smtp_config.get('encryption')
-        self._smtp_address = smtp_config.get('smtp')
-        self._smtp_port = smtp_config.get('port')
+        self._smtp_username = smtp_config['username']
+        self._stmp_password = smtp_config['password']
+        self._encryption = smtp_config['encryption']
+        self._smtp_address = smtp_config['smtp_address']
+        self._smtp_port = smtp_config['port']
         self._smtp_server = None
 
     def send_mail(self, recipients):
@@ -24,6 +24,7 @@ class Mailer:
                     to_addrs=recipient['email'],
                     msg=self._compose_mail(
                         sender_address=self._smtp_username,
+                        recipient_address=recipient['email'],
                         mail_subject=recipient['subject'],
                         mail_body=recipient['message']
                     )
@@ -57,7 +58,13 @@ class Mailer:
         except smtplib.SMTPException:
             pass
 
-    def _compose_mail(self, sender_address, mail_subject, mail_body):
+    def _compose_mail(
+            self,
+            sender_address,
+            recipient_address,
+            mail_subject,
+            mail_body
+    ):
         composed_mail = MIMEText(
             _text=mail_body.encode('utf-8'),
             _subtype='plain',
@@ -65,6 +72,7 @@ class Mailer:
         )
 
         composed_mail['From'] = sender_address
+        composed_mail['To'] = recipient_address
         composed_mail['Subject'] = Header(
             s='{}・{}'.format(
                 mail_subject,
