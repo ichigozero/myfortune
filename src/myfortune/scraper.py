@@ -97,15 +97,42 @@ class NipponTvScraper(Scraper):
                 div_rank = div_row_1.find('div', class_='rank')
 
                 if div_rank:
-                    rank = (
+                    rank = int(
                         div_rank
                         .get_text(strip=True)
+                        .replace('位', '')
                     )
                 else:
                     if index == 10:
-                        rank = '12位'
+                        rank = 12
                     else:
-                        rank = '1位'
+                        rank = 1
+
+                if rank == 1:
+                    rank_group = (
+                        self._soup
+                        .find('h3', class_='rankGroup-1')
+                        .get_text(strip=True)
+                    )
+                elif rank < 7:
+                    rank_group = (
+                        self._soup
+                        .find('h3', class_='rankGroup-2')
+                        .get_text(strip=True)
+                    )
+                elif rank < 11:
+                    rank_group = (
+                        self._soup
+                        .find('h3', class_='rankGroup-7')
+                        .get_text(strip=True)
+                    )
+                else:
+                    rank_group = (
+                        self._soup
+                        .find('h3', class_='rankGroup-12')
+                        .get_text(strip=True)
+                    )
+
                 month = int(
                     div_row_1
                     .find('p', class_='month')
@@ -124,9 +151,13 @@ class NipponTvScraper(Scraper):
                 )
 
                 readings[month] = {
-                    'rank': rank,
+                    'rank': '{}位'.format(rank),
+                    'rank_group': rank_group,
                     'forecast': forecast,
-                    'lucky_color': lucky_color
+                    'lucky_color': ''.join([
+                        'ラッキーカラー：',
+                        lucky_color
+                    ])
                 }
 
             self._horoscope_readings.update(readings)
@@ -164,6 +195,14 @@ class TbsScraper(Scraper):
         super().get_soup(TBS_URL)
 
     def extract_all_horoscope_readings(self):
+        def _extract_rank_title(div_class_name):
+            return (
+                self._soup
+                .find('div', class_=div_class_name)
+                .find('span')
+                .get_text(strip=True)
+            )
+
         try:
             readings = {}
             uranai_boxes = self._soup.find_all(
@@ -174,11 +213,24 @@ class TbsScraper(Scraper):
             for uranai_box in uranai_boxes:
                 zodiac_sign = ZODIAC_SIGNS.get(
                     uranai_box.find_all('span')[1].get('id'))
-                rank = (
+                rank = int(
                     uranai_box
                     .find('span', class_='alt')
                     .get_text(strip=True)
+                    .replace('位', '')
                 )
+
+                if rank == 1:
+                    rank_title = ''
+                elif rank < 6:
+                    rank_title = _extract_rank_title('mini_tit1')
+                elif rank < 9:
+                    rank_title = _extract_rank_title('mini_tit2')
+                elif rank < 12:
+                    rank_title = _extract_rank_title('mini_tit3')
+                else:
+                    rank_title = _extract_rank_title('mini_tit4')
+
                 forecast = (
                     uranai_box
                     .find('p', class_='uranai_text')
@@ -189,14 +241,12 @@ class TbsScraper(Scraper):
                     .find('span', class_='lucky_color')
                     .get_text(strip=True)
                     .replace(u'\xa0', u'')
-                    .replace('ラッキーカラー★', '')
                 )
                 lucky_item = (
                     uranai_box
                     .find('span', class_='lucky_item')
                     .get_text(strip=True)
                     .replace(u'\xa0', u'')
-                    .replace('ラッキーアイテム★', '')
                 )
 
                 p_tag = uranai_box.find('p', class_='advice_text')
@@ -206,7 +256,8 @@ class TbsScraper(Scraper):
                     advice = ''
 
                 readings[zodiac_sign] = {
-                    'rank': rank,
+                    'rank': '{}位'.format(rank),
+                    'rank_title': rank_title,
                     'forecast': forecast,
                     'lucky_color': lucky_color,
                     'lucky_item': lucky_item,
@@ -252,36 +303,41 @@ class TvAsahiScraper(Scraper):
                     .find('p', class_='read')
                     .get_text(strip=True)
                 )
-                key_of_fortune = (
+
+                lucky_color_text = (
                     seiza_box
-                    .find('div', class_='read-area')
-                    .contents[8]
-                    .replace('：', '')
-                    .strip()
+                    .find('span', class_='lucky-color-txt')
                 )
-                lucky_color = (
+                lucky_color = ''.join([
+                    lucky_color_text.get_text(strip=True),
+                    lucky_color_text.next_sibling.strip()
+                ])
+
+                key_of_fortune_text = (
                     seiza_box
-                    .find('div', class_='read-area')
-                    .contents[4]
-                    .replace('：', '')
-                    .strip()
+                    .find('span', class_='key-txt')
                 )
-                lucky_money = len(
+                key_of_fortune = ''.join([
+                    key_of_fortune_text.get_text(strip=True),
+                    key_of_fortune_text.next_sibling.strip()
+                ])
+
+                lucky_money_count = len(
                     seiza_box
                     .find('li', class_='lucky-money')
                     .find_all('img', class_='icon-money')
                 )
-                lucky_love = len(
+                lucky_love_count = len(
                     seiza_box
                     .find('li', class_='lucky-love')
                     .find_all('img', class_='icon-love')
                 )
-                lucky_work = len(
+                lucky_work_count = len(
                     seiza_box
                     .find('li', class_='lucky-work')
                     .find_all('img', class_='icon-work')
                 )
-                lucky_health = len(
+                lucky_health_count = len(
                     seiza_box
                     .find('li', class_='lucky-health')
                     .find_all('img', class_='icon-health')
@@ -289,12 +345,24 @@ class TvAsahiScraper(Scraper):
 
                 readings[zodiac_sign].update({
                     'forecast': forecast,
-                    'key_of_fortune': key_of_fortune,
                     'lucky_color': lucky_color,
-                    'lucky_money': str(lucky_money),
-                    'lucky_love': str(lucky_love),
-                    'lucky_work': str(lucky_work),
-                    'lucky_health': str(lucky_health)
+                    'key_of_fortune': key_of_fortune,
+                    'lucky_money': ''.join([
+                        '金運：',
+                        '★' * lucky_money_count
+                    ]),
+                    'lucky_love': ''.join([
+                        '恋愛運：',
+                        '★' * lucky_love_count
+                    ]),
+                    'lucky_work': ''.join([
+                        '仕事運：',
+                        '★' * lucky_work_count
+                    ]),
+                    'lucky_health': ''.join([
+                        '健康運：',
+                        '★' * lucky_health_count
+                    ])
                 })
 
             self._horoscope_readings = readings

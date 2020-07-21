@@ -8,12 +8,12 @@ def test_extract_all_horoscope_readings(tv_asahi_scraper):
             '会話の中に参考になる情報が。'
             '買い物は定番商品をチェック。'
         ),
-        'key_of_fortune': 'イルカのグッズ',
-        'lucky_color': '黒',
-        'lucky_money': '5',
-        'lucky_love': '5',
-        'lucky_work': '4',
-        'lucky_health': '5'
+        'lucky_color': 'ラッキーカラー：黒',
+        'key_of_fortune': '幸運のカギ：イルカのグッズ',
+        'lucky_money': '金運：★★★★★',
+        'lucky_love': '恋愛運：★★★★★',
+        'lucky_work': '仕事運：★★★★',
+        'lucky_health': '健康運：★★★★★',
     }
 
     assert tv_asahi_scraper._horoscope_readings['おひつじ座'] == {
@@ -23,10 +23,10 @@ def test_extract_all_horoscope_readings(tv_asahi_scraper):
             '自慢話にならないように気を配りましょう。'
             '大人の対応を。'
         ),
-        'key_of_fortune': 'しおり',
-        'lucky_color': 'ネイビー',
-        'lucky_money': '1',
-        'lucky_love': '2',
-        'lucky_work': '2',
-        'lucky_health': '3'
+        'lucky_color': 'ラッキーカラー：ネイビー',
+        'key_of_fortune': '幸運のカギ：しおり',
+        'lucky_money': '金運：★',
+        'lucky_love': '恋愛運：★★',
+        'lucky_work': '仕事運：★★',
+        'lucky_health': '健康運：★★★',
     }
