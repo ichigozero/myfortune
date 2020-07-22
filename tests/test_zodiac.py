@@ -13,3 +13,4 @@ def test_get_zodiac_sign():
     assert Zodiac.get_zodiac_sign(birthdate='11/23') == 'いて座'
     assert Zodiac.get_zodiac_sign(birthdate='12/22') == 'やぎ座'
     assert Zodiac.get_zodiac_sign(birthdate='1/20') == 'みずがめ座'
+    assert Zodiac.get_zodiac_sign(birthdate='2/19') == 'うお座'
