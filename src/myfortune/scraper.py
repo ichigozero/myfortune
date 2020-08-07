@@ -1,7 +1,10 @@
+import datetime
+import pickle
+import os
 import re
 import requests
-from datetime import datetime
 
+from appdirs import AppDirs
 from bs4 import BeautifulSoup
 
 from .zodiac import Zodiac
@@ -21,6 +24,35 @@ class Scraper:
 
     def filter_horoscope_readings(self, birthdate):
         return self._horoscope_readings.get(Zodiac.get_zodiac_sign(birthdate))
+
+    def cache_horoscope_readings(self, cache_title):
+        cache_path = self._construct_cache_file_path(cache_title)
+
+        with open(cache_path, 'wb') as file:
+            pickle.dump(obj=self._horoscope_readings, file=file)
+
+    def load_horoscope_readings_from_cache(self, cache_title):
+        try:
+            cache_path = self._construct_cache_file_path(cache_title)
+
+            with open(cache_path, 'rb') as file:
+                self._horoscope_readings = pickle.load(file)
+        except OSError:
+            pass
+
+    def _construct_cache_file_path(self, cache_title):
+        app_dirs = AppDirs(appname='myfortune')
+        cache_filename = '{}_{}.pickle'.format(
+            cache_title,
+            datetime.datetime.today().strftime('%Y%m%d')
+        )
+
+        os.makedirs(app_dirs.user_cache_dir, exist_ok=True)
+
+        return os.path.join(
+            app_dirs.user_cache_dir,
+            cache_filename
+        )
 
 
 FUJI_TV_URL = 'http://fcs2.sp2.fujitv.co.jp/fortune.php'
@@ -165,7 +197,7 @@ class NipponTvScraper(Scraper):
             pass
 
     def filter_horoscope_readings(self, birthdate):
-        parsed_birthdate = datetime.strptime(birthdate, '%m/%d')
+        parsed_birthdate = datetime.datetime.strptime(birthdate, '%m/%d')
 
         return self._horoscope_readings.get(parsed_birthdate.month)
 
