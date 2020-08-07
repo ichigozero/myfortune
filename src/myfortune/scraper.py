@@ -1,7 +1,9 @@
+import datetime
+import os
 import re
 import requests
-from datetime import datetime
 
+from appdirs import AppDirs
 from bs4 import BeautifulSoup
 
 from .zodiac import Zodiac
@@ -21,6 +23,20 @@ class Scraper:
 
     def filter_horoscope_readings(self, birthdate):
         return self._horoscope_readings.get(Zodiac.get_zodiac_sign(birthdate))
+
+    def _construct_cache_file_path(self, cache_title):
+        app_dirs = AppDirs(appname='myfortune')
+        cache_filename = '{}_{}.pickle'.format(
+            cache_title,
+            datetime.datetime.today().strftime('%Y%m%d')
+        )
+
+        os.makedirs(app_dirs.user_cache_dir, exist_ok=True)
+
+        return os.path.join(
+            app_dirs.user_cache_dir,
+            cache_filename
+        )
 
 
 FUJI_TV_URL = 'http://fcs2.sp2.fujitv.co.jp/fortune.php'
@@ -165,7 +181,7 @@ class NipponTvScraper(Scraper):
             pass
 
     def filter_horoscope_readings(self, birthdate):
-        parsed_birthdate = datetime.strptime(birthdate, '%m/%d')
+        parsed_birthdate = datetime.datetime.strptime(birthdate, '%m/%d')
 
         return self._horoscope_readings.get(parsed_birthdate.month)
 
