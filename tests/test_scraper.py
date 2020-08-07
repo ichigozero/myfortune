@@ -48,6 +48,25 @@ def test_cache_horoscope_readings(
     assert filecmp.cmp(_mock_cache_file_path(), dummy_cache) is True
 
 
+def test_load_horoscope_readings_from_cache(
+        monkeypatch,
+        dummy_cache,
+        scraper
+):
+    def _mock_cache_file_path(*args, **kwargs):
+        return dummy_cache
+
+    monkeypatch.setattr(
+        scraper,
+        '_construct_cache_file_path',
+        _mock_cache_file_path
+    )
+    scraper._horoscope_readings = None
+    scraper.load_horoscope_readings_from_cache('')
+
+    assert scraper._horoscope_readings == {}
+
+
 def test_construct_cache_path(
         monkeypatch,
         mocker,

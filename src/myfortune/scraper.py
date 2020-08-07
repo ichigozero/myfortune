@@ -31,6 +31,15 @@ class Scraper:
         with open(cache_path, 'wb') as file:
             pickle.dump(obj=self._horoscope_readings, file=file)
 
+    def load_horoscope_readings_from_cache(self, cache_title):
+        try:
+            cache_path = self._construct_cache_file_path(cache_title)
+
+            with open(cache_path, 'rb') as file:
+                self._horoscope_readings = pickle.load(file)
+        except OSError:
+            pass
+
     def _construct_cache_file_path(self, cache_title):
         app_dirs = AppDirs(appname='myfortune')
         cache_filename = '{}_{}.pickle'.format(
