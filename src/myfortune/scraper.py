@@ -26,10 +26,11 @@ class Scraper:
         return self._horoscope_readings.get(Zodiac.get_zodiac_sign(birthdate))
 
     def cache_horoscope_readings(self, cache_title):
-        cache_path = self._construct_cache_file_path(cache_title)
+        if self._horoscope_readings:
+            cache_path = self._construct_cache_file_path(cache_title)
 
-        with open(cache_path, 'wb') as file:
-            pickle.dump(obj=self._horoscope_readings, file=file)
+            with open(cache_path, 'wb') as file:
+                pickle.dump(obj=self._horoscope_readings, file=file)
 
     def load_horoscope_readings_from_cache(self, cache_title):
         try:

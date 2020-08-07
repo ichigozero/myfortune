@@ -78,10 +78,18 @@ def test_print_go_go_hoshi_horoscope_readings(mocker):
 
 
 def _test_print_horoscope_readings(mocker, command, title, scraper):
+    load_cache = mocker.patch.object(
+        scraper,
+        'load_horoscope_readings_from_cache'
+    )
     get_soup = mocker.patch.object(scraper, 'get_soup')
     extract_readings = mocker.patch.object(
         scraper,
         'extract_all_horoscope_readings'
+    )
+    save_cache = mocker.patch.object(
+        scraper,
+        'cache_horoscope_readings'
     )
     filter_readings = mocker.patch.object(
         scraper,
@@ -98,7 +106,9 @@ def _test_print_horoscope_readings(mocker, command, title, scraper):
     result = runner.invoke(command, ['1/21'])
 
     get_soup.assert_called_once()
+    load_cache.assert_called_once()
     extract_readings.assert_called_once()
+    save_cache.assert_called_once()
     filter_readings.assert_called_once()
     assert result.output == '\n'.join([
         title,
@@ -157,10 +167,18 @@ def _test_send_horoscope_readings(mocker, command, title, scraper):
             }
         }
 
+    load_cache = mocker.patch.object(
+        scraper,
+        'load_horoscope_readings_from_cache'
+    )
     get_soup = mocker.patch.object(scraper, 'get_soup')
     extract_readings = mocker.patch.object(
         scraper,
         'extract_all_horoscope_readings'
+    )
+    save_cache = mocker.patch.object(
+        scraper,
+        'cache_horoscope_readings'
     )
     filter_readings = mocker.patch.object(
         scraper,
@@ -183,8 +201,10 @@ def _test_send_horoscope_readings(mocker, command, title, scraper):
     runner = CliRunner()
     runner.invoke(command, ['--email', 'foo@localhost', '1/21'])
 
+    load_cache.assert_called_once()
     get_soup.assert_called_once()
     extract_readings.assert_called_once()
+    save_cache.assert_called_once()
     filter_readings.assert_called_once()
     import_config.assert_called_once()
     send_mail.assert_called_once_with([

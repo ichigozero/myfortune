@@ -78,8 +78,12 @@ def output_horoscope_readings(scraper, birthdate, email):
 
 
 def print_horoscope_readings(scraper, birthdate):
-    scraper.get_soup()
-    scraper.extract_all_horoscope_readings()
+    scraper.load_horoscope_readings_from_cache()
+
+    if scraper._horoscope_readings == {}:
+        scraper.get_soup()
+        scraper.extract_all_horoscope_readings()
+        scraper.cache_horoscope_readings()
 
     click.echo(scraper)
     filtered_readings = (
@@ -96,8 +100,12 @@ def send_horoscope_readings(scraper, birthdate, email):
     app_config = AppConfig()
     app_config.import_config()
 
-    scraper.get_soup()
-    scraper.extract_all_horoscope_readings()
+    scraper.load_horoscope_readings_from_cache()
+
+    if scraper._horoscope_readings == {}:
+        scraper.get_soup()
+        scraper.extract_all_horoscope_readings()
+        scraper.cache_horoscope_readings()
 
     filtered_readings = (
         scraper
