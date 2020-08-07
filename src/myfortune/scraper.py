@@ -1,4 +1,5 @@
 import datetime
+import pickle
 import os
 import re
 import requests
@@ -23,6 +24,12 @@ class Scraper:
 
     def filter_horoscope_readings(self, birthdate):
         return self._horoscope_readings.get(Zodiac.get_zodiac_sign(birthdate))
+
+    def cache_horoscope_readings(self, cache_title):
+        cache_path = self._construct_cache_file_path(cache_title)
+
+        with open(cache_path, 'wb') as file:
+            pickle.dump(obj=self._horoscope_readings, file=file)
 
     def _construct_cache_file_path(self, cache_title):
         app_dirs = AppDirs(appname='myfortune')

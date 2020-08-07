@@ -1,4 +1,5 @@
 import datetime
+import filecmp
 import os
 import requests
 
@@ -26,6 +27,25 @@ def test_filter_horoscope_readings(mocker, scraper):
     scraper._horoscope_readings = {'おひつじ座': 'foo'}
 
     assert scraper.filter_horoscope_readings('4/1') == 'foo'
+
+
+def test_cache_horoscope_readings(
+        monkeypatch,
+        tmp_path,
+        dummy_cache,
+        scraper
+):
+    def _mock_cache_file_path(*args, **kwargs):
+        return tmp_path / 'file_20200717.pickle'
+
+    monkeypatch.setattr(
+        scraper,
+        '_construct_cache_file_path',
+        _mock_cache_file_path
+    )
+    scraper.cache_horoscope_readings('')
+
+    assert filecmp.cmp(_mock_cache_file_path(), dummy_cache) is True
 
 
 def test_construct_cache_path(
