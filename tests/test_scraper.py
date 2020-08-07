@@ -43,6 +43,7 @@ def test_cache_horoscope_readings(
         '_construct_cache_file_path',
         _mock_cache_file_path
     )
+    scraper._horoscope_readings = {'foo': 'bar'}
     scraper.cache_horoscope_readings('')
 
     assert filecmp.cmp(_mock_cache_file_path(), dummy_cache) is True
@@ -64,7 +65,7 @@ def test_load_horoscope_readings_from_cache(
     scraper._horoscope_readings = None
     scraper.load_horoscope_readings_from_cache('')
 
-    assert scraper._horoscope_readings == {}
+    assert scraper._horoscope_readings == {'foo': 'bar'}
 
 
 def test_construct_cache_path(
