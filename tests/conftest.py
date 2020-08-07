@@ -57,7 +57,7 @@ def dummy_cache():
 
 
 @pytest.fixture(scope='module')
-def config_path():
+def dummy_config():
     return os.path.join(
         os.path.dirname(os.path.realpath(__file__)),
         'test_files',

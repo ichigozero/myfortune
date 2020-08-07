@@ -1,9 +1,13 @@
 import logging
 import os
 import json
-from pathlib import Path
 
-DEFAULT_CONFIG_PATH = os.path.join(str(Path.home()), '.myfortune.json')
+from appdirs import AppDirs
+
+DEFAULT_CONFIG_PATH = os.path.join(
+    AppDirs('myfortune').user_data_dir,
+    'myfortune.json'
+)
 
 
 class AppConfig:
@@ -12,6 +16,8 @@ class AppConfig:
         self.config_values = None
 
     def export_config(self):
+        os.makedirs(os.path.dirname(self._config_path), exist_ok=True)
+
         with open(self._config_path, 'w') as file:
             file.write(
                 json.dumps(

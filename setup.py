@@ -11,6 +11,7 @@ setup(
     packages=find_packages(where='src'),
     package_dir={'': 'src'},
     install_requires=[
+        'appdirs',
         'beautifulsoup4',
         'click',
         'requests',

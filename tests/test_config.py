@@ -1,21 +1,25 @@
 import filecmp
 import logging
+import os
 
 import pytest
 
 
-def test_export_config(tmp_path, config_path, app_config):
-    tmp_config_path = tmp_path / 'myfortune.json'
+def test_export_config(mocker, tmp_path, dummy_config, app_config):
+    spy_makedirs = mocker.spy(os, 'makedirs')
+
+    tmp_config_path = tmp_path / 'sub' / 'myfortune.json'
     app_config._config_path = tmp_config_path
-    app_config.config_values == {'foo': 'bar'}
+    app_config.config_values = {'foo': 'bar'}
 
     app_config.export_config()
 
-    filecmp.cmp(tmp_config_path, config_path)
+    spy_makedirs.assert_called_once_with(str(tmp_path / 'sub'), exist_ok=True)
+    assert filecmp.cmp(tmp_config_path, dummy_config) is True
 
 
-def test_import_config(config_path, app_config):
-    app_config._config_path = config_path
+def test_import_config(dummy_config, app_config):
+    app_config._config_path = dummy_config
 
     app_config.import_config()
 
