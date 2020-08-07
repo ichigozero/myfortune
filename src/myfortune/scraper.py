@@ -108,6 +108,12 @@ class FujiTvScraper(Scraper):
         except (AttributeError, TypeError):
             pass
 
+    def cache_horoscope_readings(self):
+        super().cache_horoscope_readings('fuji_tv')
+
+    def load_horoscope_readings_from_cache(self):
+        super().load_horoscope_readings_from_cache('fuji_tv')
+
 
 NIPPON_TV_URL = 'https://www.ntv.co.jp/sukkiri/sukkirisu/'
 
@@ -200,6 +206,12 @@ class NipponTvScraper(Scraper):
         parsed_birthdate = datetime.datetime.strptime(birthdate, '%m/%d')
 
         return self._horoscope_readings.get(parsed_birthdate.month)
+
+    def cache_horoscope_readings(self):
+        super().cache_horoscope_readings('nippon_tv')
+
+    def load_horoscope_readings_from_cache(self):
+        super().load_horoscope_readings_from_cache('nippon_tv')
 
 
 TBS_URL = 'https://www.tbs.co.jp/hayadoki/gudetama/'
@@ -299,6 +311,12 @@ class TbsScraper(Scraper):
             self._horoscope_readings = readings
         except (AttributeError, TypeError):
             pass
+
+    def cache_horoscope_readings(self):
+        super().cache_horoscope_readings('tbs')
+
+    def load_horoscope_readings_from_cache(self):
+        super().load_horoscope_readings_from_cache('tbs')
 
 
 TV_ASAHI_URL = 'https://www.tv-asahi.co.jp/goodmorning/uranai/'
@@ -400,3 +418,9 @@ class TvAsahiScraper(Scraper):
             self._horoscope_readings = readings
         except (AttributeError, TypeError):
             pass
+
+    def cache_horoscope_readings(self):
+        super().cache_horoscope_readings('tv_asahi')
+
+    def load_horoscope_readings_from_cache(self):
+        super().load_horoscope_readings_from_cache('tv_asahi')
