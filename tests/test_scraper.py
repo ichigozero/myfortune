@@ -1,6 +1,6 @@
 import datetime
-import filecmp
 import os
+import pickle
 import requests
 
 from bs4 import BeautifulSoup
@@ -29,24 +29,25 @@ def test_filter_horoscope_readings(mocker, scraper):
     assert scraper.filter_horoscope_readings('4/1') == 'foo'
 
 
-def test_cache_horoscope_readings(
-        monkeypatch,
-        tmp_path,
-        dummy_cache,
-        scraper
-):
-    def _mock_cache_file_path(*args, **kwargs):
-        return tmp_path / 'file_20200717.pickle'
-
-    monkeypatch.setattr(
+def test_cache_horoscope_readings(mocker, tmp_path, scraper):
+    tmp_cache_path = str(tmp_path / 'file_20200717.pickle')
+    mock_path = mocker.patch.object(
         scraper,
         '_construct_cache_file_path',
-        _mock_cache_file_path
+        return_value=tmp_cache_path
     )
+    mock_open = mocker.patch(
+        'builtins.open',
+        mocker.mock_open()
+    )
+    spy_dump = mocker.spy(pickle, 'dump')
+
     scraper._horoscope_readings = {'foo': 'bar'}
     scraper.cache_horoscope_readings('')
 
-    assert filecmp.cmp(_mock_cache_file_path(), dummy_cache) is True
+    mock_path.assert_called_once()
+    mock_open.assert_called_once_with(tmp_cache_path, 'wb')
+    spy_dump.assert_called_once()
 
 
 def test_load_horoscope_readings_from_cache(
