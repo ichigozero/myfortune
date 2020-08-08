@@ -1,5 +1,7 @@
 [report]
 exclude_lines =
     pragma: no cover
-    def cmd
+    cmd()
+    def main
     def uranatte
+    if __name__ == .__main__.:
